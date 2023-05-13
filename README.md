@@ -44,13 +44,13 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 Install the react-router-dom in the front end folder.
 https://reactrouter.com/en/main/start/tutorial
 
-### `install bootstrap` to display social media icons
+### install bootstrap to display social media icons
 
 Run `npm install bootstrap@5.3.0-alpha3` to install bootsrap icons
 https://icons.getbootstrap.com/
 
 
-### `instal react-bootstrap` for the carousel /gallery
+### install react-bootstrap for the carousel /gallery
 
 Run `npm install react-bootstrap bootstrap` to install the package
 https://react-bootstrap.github.io/getting-started/introduction/
