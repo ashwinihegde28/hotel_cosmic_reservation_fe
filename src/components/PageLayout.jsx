@@ -3,6 +3,9 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import "./styles/navbar-styles.css"
 import Navbar from "./Navbar";
+import Footer from "./footer";
+
+
 
 
 export default function PageLayout() {
@@ -15,7 +18,7 @@ export default function PageLayout() {
       <Outlet />
 
       {/* You can add a footer to get fancy in here :) */}
-
+      <Footer />
     </>
   );
 }

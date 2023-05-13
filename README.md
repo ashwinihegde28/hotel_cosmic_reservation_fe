@@ -39,10 +39,15 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-### `npm i react-router-dom`
+### `npm i react-router-dom` to manage the paths
 
 Install the react-router-dom in the front end folder.
 https://reactrouter.com/en/main/start/tutorial
+
+### `install bootstrap` to display social media icons
+
+Run `npm install bootstrap@5.3.0-alpha3` to install bootsrap icons
+https://icons.getbootstrap.com/
 
 
 ## Learn More

@@ -12,6 +12,7 @@ import LandingPage from "./components/LandingPage";
 import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Reservations from "./components/Reservations";
+import Aboutus from "./components/Aboutus";
 
 import "./components/styles/navbar-styles.css"
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/services" element={<Services />} /> 
           <Route path="/gallery" element={<Gallery />} /> 
           <Route path="/reservations" element={<Reservations />} /> 
+          <Route path="/aboutus" element={<Aboutus />} /> 
         </Route>
         
       </Routes>
