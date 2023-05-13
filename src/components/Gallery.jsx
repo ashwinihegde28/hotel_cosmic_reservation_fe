@@ -5,6 +5,9 @@ import "./styles/gallery-styles.css"
 
 import Carousel from 'react-bootstrap/Carousel';
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 export default function Services() {
 
   return (
@@ -75,7 +78,31 @@ export default function Services() {
         </Carousel>
 
       </div>
+
+      <div className="cards">
+      <Card style={{ width: '38rem' }}>
+      <Card.Img variant="top" src="https://img.freepik.com/free-vector/astronaut-making-selfie-moon_1441-3247.jpg?w=900&t=st=1684014557~exp=1684015157~hmac=62f870c6352992be49ae95519afe618c97bc057e31757ed2574835d2023eb566" />
+      <Card.Body>
+        <Card.Title>Activity: Mars tour</Card.Title>
+        <Card.Text>
+          Become an explorer and walk on the surface
+        </Card.Text>
+        <Button variant="primary">More information</Button>
+      </Card.Body>
+    </Card>
+    <Card style={{ width: '38rem' }}>
+      <Card.Img variant="top" src="https://www.snezny.co.uk/wp-content/uploads/2021/02/W-Kuala-Lumpur-Photos-from-Marriott.com-8.jpg" />
+      <Card.Body>
+        <Card.Title>Restaurant: The secret loundge </Card.Title>
+        <Card.Text>
+          Have a snack and a drink at any time of the day
+        </Card.Text>
+        <Button variant="primary">More information</Button>
+      </Card.Body>
+    </Card>
+      </div>
     </p>
+
 
   )
 };
