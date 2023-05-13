@@ -50,6 +50,19 @@ Run `npm install bootstrap@5.3.0-alpha3` to install bootsrap icons
 https://icons.getbootstrap.com/
 
 
+
+
+
+
+
+### `instal react-bootstrap` for the carousel /gallery
+
+Run `npm install react-bootstrap bootstrap` to install the package
+https://react-bootstrap.github.io/getting-started/introduction/
+
+Carousel doc:
+https://react-bootstrap.github.io/components/carousel/
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
