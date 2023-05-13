@@ -45,6 +45,19 @@ Install the react-router-dom in the front end folder.
 https://reactrouter.com/en/main/start/tutorial
 
 
+
+
+
+
+
+### `instal react-bootstrap` for the carousel /gallery
+
+Run `npm install react-bootstrap bootstrap` to install the package
+https://react-bootstrap.github.io/getting-started/introduction/
+
+Carousel doc:
+https://react-bootstrap.github.io/components/carousel/
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
