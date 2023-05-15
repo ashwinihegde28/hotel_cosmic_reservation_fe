@@ -15,12 +15,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
-  margin-top: 20px; /* Adjust the margin-top value as needed */
+  margin-top: 20px;
 }
 
 .home-body h3 {
   background: linear-gradient(to right, #ebd910, #999999);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 10px; /* Adjust the margin-top value as needed */
+  margin-top: 10px;
 }

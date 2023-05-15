@@ -6,7 +6,6 @@ import Button from "../components/Button";
 import "./styles/navbar-styles.css";
 import "./styles/home-styles.css";
 import "./styles/button-style.css";
-import spaceship from "./images/space_ship.gif";
 
 export default function Home() {
   return (
