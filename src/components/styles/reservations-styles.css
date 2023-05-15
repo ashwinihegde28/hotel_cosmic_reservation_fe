@@ -1,0 +1,50 @@
+.top-image {
+  background-image: url("../../lounge.png");
+  height: 1000px;
+  background-size: cover;
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.search-img {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.article {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+
+.header {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+}
+
+.form {
+  margin-top: 100px;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  
+  
+}
+
+.mb-3 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: larger;
+}
