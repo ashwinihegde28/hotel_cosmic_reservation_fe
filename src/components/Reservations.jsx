@@ -16,10 +16,11 @@ export default function Reservations() {
   return (
 
     <p className="reservations-body">
-      <div className="top-image">
-        <title className="title">Reservations page</title>
+    <article className="top-image">
+      <h1 className="title">Reservations</h1>
+    </article>
+      <div>  
       </div>
-      <div>  </div>
       <div className="search-img">
         <Card style={{ width: '60rem' }}>
           <Card.Img variant="top" src="https://www.optics-trade.eu/blog/wp-content/uploads/2020/12/Telescope-VS-Binoculars.jpg" />

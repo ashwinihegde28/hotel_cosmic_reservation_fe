@@ -2,6 +2,14 @@
   background-image: url("../../lounge.png");
   height: 1000px;
   background-size: cover;
+  background-position: center;
+}
+
+.title {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+  padding-top: 100px;
 }
 
 .bottom-image {
