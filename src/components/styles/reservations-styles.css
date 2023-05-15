@@ -1,5 +1,5 @@
 .top-image {
-  background-image: url("../../lounge.png");
+  background-image: url("../images/lounge.png");
   height: 1000px;
   background-size: cover;
   background-position: center;
@@ -13,7 +13,7 @@
 }
 
 .bottom-image {
-  background-image: url("../../lounge2.jpg");
+  background-image: url("../images/lounge2.jpg");
   height: 1200px;
   
   background-size: cover;
