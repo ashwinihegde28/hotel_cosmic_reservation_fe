@@ -1,0 +1,13 @@
+.cards {
+  padding: 30px;
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+
+
+.d-block {
+height: 400px;
+
+}

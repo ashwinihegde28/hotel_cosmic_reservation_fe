@@ -13,6 +13,11 @@ import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Reservations from "./components/Reservations";
 import Aboutus from "./components/Aboutus";
+import RoomDisplay from "./components/RoomDisplay";
+import MoonThemeRoom from "./components/MoonThemeRoom";
+import VenusThemeRoom from "./components/VenusThemeRoom";
+import JupiterThemeRoom from "./components/JupiterThemeRoom";
+
 
 import "./components/styles/navbar-styles.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,10 +38,14 @@ function App() {
         <Route path="/" element={<PageLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/landing" element={<LandingPage />} /> 
+          <Route path="/roomdisplay" element={<RoomDisplay />} /> 
           <Route path="/services" element={<Services />} /> 
           <Route path="/gallery" element={<Gallery />} /> 
           <Route path="/reservations" element={<Reservations />} /> 
           <Route path="/aboutus" element={<Aboutus />} /> 
+          <Route path="/moonthemeroom" element={<MoonThemeRoom />} /> 
+          <Route path="/venusthemeroom" element={<VenusThemeRoom />} /> 
+          <Route path="/jupiterthemeroom" element={<JupiterThemeRoom />} /> 
         </Route>
         
       </Routes>
