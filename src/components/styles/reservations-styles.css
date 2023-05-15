@@ -1,0 +1,72 @@
+.top-image {
+  background-image: url("../../lounge.png");
+  height: 1000px;
+  background-size: cover;
+  background-position: center;
+}
+
+.title {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.bottom-image {
+  background-image: url("../../lounge2.jpg");
+  height: 1200px;
+  
+  background-size: cover;
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.search-img {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.article {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+
+.header {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+}
+
+.form {
+  margin-top: 100px;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  
+}
+
+.mb-3 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: larger;
+}
+
+.card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+

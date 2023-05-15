@@ -6,6 +6,7 @@ import "./styles/navbar-styles.css"
 export default function Navbar() {
 
   return (
+    
     <nav className="navbar">
       <a href="/" className="nav-title">
         Hotel Cosmic 
