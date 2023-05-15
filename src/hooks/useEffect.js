@@ -39,7 +39,7 @@ export function customersReducer(state, action) {
 }
 
 // CUSTOMER HOOK
-const useCustomer = (id) => {
+export function useCustomer(id) {
   const [state, dispatch] = useReducer(customerReducer, {
     customer: null,
     loading: true,
@@ -60,9 +60,9 @@ const useCustomer = (id) => {
   }, [id]);
 
   return state;
-};
+}
 
-const customerReducer = (state, action) => {
+export function customerReducer(state, action) {
   switch (action.type) {
     case "SET_CUSTOMER":
       return {
@@ -73,237 +73,226 @@ const customerReducer = (state, action) => {
     default:
       return state;
   }
-};
+}
 
-// // ROOMS HOOK
-// const useRooms = () => {
-//   const [state, dispatch] = useReducer(roomsReducer, {
-//     rooms: [],
-//     loading: true,
-//   });
+// ROOMS HOOK
+export function useRooms() {
+  const [state, dispatch] = useReducer(roomsReducer, {
+    rooms: [],
+    loading: true,
+  });
 
-//   useEffect(() => {
-//     axios({
-//       method: "GET",
-//       url: "/api/rooms",
-//     })
-//       .then(({ data }) => {
-//         dispatch({
-//           type: "SET_ROOMS",
-//           payload: data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }, []);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "/api/rooms",
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "SET_ROOMS",
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-//   return state;
-// };
+  return state;
+}
 
-// const roomsReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_ROOMS":
-//       return {
-//         ...state,
-//         rooms: action.payload,
-//         loading: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export function roomsReducer(state, action) {
+  switch (action.type) {
+    case "SET_ROOMS":
+      return {
+        ...state,
+        rooms: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
 
-// // ROOM HOOK
-// const useRoom = (id) => {
-//   const [state, dispatch] = useReducer(roomReducer, {
-//     room: null,
-//     loading: true,
-//   });
+// ROOM HOOK
+export function useRoom(id) {
+  const [state, dispatch] = useReducer(roomReducer, {
+    room: null,
+    loading: true,
+  });
 
-//   useEffect(() => {
-//     axios({
-//       method: "GET",
-//       url: `/api/rooms/${id}`,
-//     })
-//       .then(({ data }) => {
-//         dispatch({
-//           type: "SET_ROOM",
-//           payload: data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }, [id]);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `/api/rooms/${id}`,
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "SET_ROOM",
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-//   return state;
-// };
+  return state;
+}
 
-// const roomReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_ROOM":
-//       return {
-//         ...state,
-//         room: action.payload,
-//         loading: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export function roomReducer(state, action) {
+  switch (action.type) {
+    case "SET_ROOM":
+      return {
+        ...state,
+        room: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
 
-// // SERVICES HOOK
-// const useServices = () => {
-//   const [state, dispatch] = useReducer(servicesReducer, {
-//     services: [],
-//     loading: true,
-//   });
+// SERVICES HOOK
+export function useServices() {
+  const [state, dispatch] = useReducer(servicesReducer, {
+    services: [],
+    loading: true,
+  });
 
-//   useEffect(() => {
-//     axios({
-//       method: "GET",
-//       url: "/api/services",
-//     })
-//       .then(({ data }) => {
-//         dispatch({
-//           type: "SET_SERVICES",
-//           payload: data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }, []);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "/api/services",
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "SET_SERVICES",
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-//   return state;
-// };
+  return state;
+}
 
-// const servicesReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_SERVICES":
-//       return {
-//         ...state,
-//         services: action.payload,
-//         loading: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export function servicesReducer(state, action) {
+  switch (action.type) {
+    case "SET_SERVICES":
+      return {
+        ...state,
+        services: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
 
-// // SERVICE HOOK
-// const useService = (id) => {
-//   const [state, dispatch] = useReducer(serviceReducer, {
-//     service: null,
-//     loading: true,
-//   });
+// SERVICE HOOK
+export function useService(id) {
+  const [state, dispatch] = useReducer(serviceReducer, {
+    service: null,
+    loading: true,
+  });
 
-//   useEffect(() => {
-//     axios({
-//       method: "GET",
-//       url: `/api/services/${id}`,
-//     })
-//       .then(({ data }) => {
-//         dispatch({
-//           type: "SET_SERVICE",
-//           payload: data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }, [id]);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `/api/services/${id}`,
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "SET_SERVICE",
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-//   return state;
-// };
+  return state;
+}
 
-// const serviceReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_SERVICE":
-//       return {
-//         ...state,
-//         service: action.payload,
-//         loading: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export function serviceReducer(state, action) {
+  switch (action.type) {
+    case "SET_SERVICE":
+      return {
+        ...state,
+        service: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
 
-// // INVOICES HOOK
-// const useInvoices = () => {
-//   const [state, dispatch] = useReducer(invoicesReducer, {
-//     invoices: [],
-//     loading: true,
-//   });
+// INVOICES HOOK
+export function useInvoices() {
+  const [state, dispatch] = useReducer(invoicesReducer, {
+    invoices: [],
+    loading: true,
+  });
 
-//   useEffect(() => {
-//     axios({
-//       method: "GET",
-//       url: "/api/invoices",
-//     })
-//       .then(({ data }) => {
-//         dispatch({
-//           type: "SET_INVOICES",
-//           payload: data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }, []);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "/api/invoices",
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "SET_INVOICES",
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-//   return state;
-// };
+  return state;
+}
 
-// const invoicesReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_INVOICES":
-//       return {
-//         ...state,
-//         invoices: action.payload,
-//         loading: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export function invoicesReducer(state, action) {
+  switch (action.type) {
+    case "SET_INVOICES":
+      return {
+        ...state,
+        invoices: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
 
-// // INVOICE HOOK
-// const useInvoice = (id) => {
-//   const [state, dispatch] = useReducer(invoiceReducer, {
-//     invoice: null,
-//     loading: true,
-//   });
+// INVOICE HOOK
+export function useInvoice(id) {
+  const [state, dispatch] = useReducer(invoiceReducer, {
+    invoice: null,
+    loading: true,
+  });
 
-//   useEffect(() => {
-//     axios({
-//       method: "GET",
-//       url: `/api/invoices/${id}`,
-//     })
-//       .then(({ data }) => {
-//         dispatch({
-//           type: "SET_INVOICE",
-//           payload: data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }, [id]);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `/api/invoices/${id}`,
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "SET_INVOICE",
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-//   return state;
-// };
+  return state;
+}
 
-// const invoiceReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_INVOICE":
-//       return {
-//         ...state,
-//         invoice: action.payload,
-//         loading: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
-
-export default {
-  useCustomers,
-  useCustomer,
-  //   useServices,
-  //   useService,
-  //   useRooms,
-  //   useRoom,
-  //   useInvoices,
-  //   useInvoice,
-};
+export function invoiceReducer(state, action) {
+  switch (action.type) {
+    case "SET_INVOICE":
+      return {
+        ...state,
+        invoice: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
