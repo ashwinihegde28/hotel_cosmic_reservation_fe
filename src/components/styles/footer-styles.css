@@ -67,3 +67,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.rect.btn {
+  stroke: #fff;
+  fill: #fff;
+  fill-opacity: 0;
+  stroke-opacity: 0;
+}
