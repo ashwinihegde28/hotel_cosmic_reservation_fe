@@ -7,15 +7,18 @@ import "./styles/navbar-styles.css";
 import "./styles/home-styles.css";
 import "./styles/button-style.css";
 
+
 export default function Home() {
+
   return (
+    
     <div className="home-body">
       <h1>Welcome to Hotel Cosmic</h1>
       <div>
         <h3>Choose the options below</h3>
       </div>
       <div className="button-container">
-        <Link to="/landing">
+        <Link to="/lobby">
           <Button text="Experience Tour" />
         </Link>
         <Link to="/reservations">
