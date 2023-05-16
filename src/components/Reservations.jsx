@@ -1,25 +1,96 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from "../components/Button";
 
-import "./styles/navbar-styles.css"
-import "./styles/reservations-styles.css"
+import "./styles/navbar-styles.css";
+import "./styles/reservations-styles.css";
 
 
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 
 
-export default function Reservations() {
+export default function Reservations(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [room, setRoom] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState({
+    email: "",
+    name: "",
+    room: "",
+    username: ""
+  });
+
+  const handleSubmit = () => {
+    alert('A form was submitted');
+  };
+
+  const handleSelectChange = (event) => {
+    console.log(event.target.value)
+  }
+
+  function validate(event) {
+    event.preventDefault();
+    
+
+    let errorExists = false;
+
+    if (name === "") {
+      errorExists = true;
+      setError(prevError => {
+        return {
+          ...prevError,
+          name: "Please enter name"
+        };
+      });
+    }
+
+    if (email === "") {
+      errorExists = true;
+      setError(prevError => {
+        return {
+          ...prevError,
+          email: "Please enter email"
+        };
+      });
+    }
+
+    if(room === "") {
+    errorExists = true
+      setError(prevError => {
+        return {
+          ...prevError, 
+          room: "Please select a room"
+        }
+      })
+      return
+    }
+
+    if (username === "") {
+      errorExists = true;
+      setError(prevError => {
+        return {
+          ...prevError,
+          username: "Please enter username"
+        };
+      });
+    }
+    if (!errorExists) {
+      handleSubmit();
+    }
+  }
+
 
   return (
 
     <p className="reservations-body">
-    <article className="top-image">
-      <h1 className="title">Reservations</h1>
-    </article>
-      <div>  
+      <article className="top-image">
+        <h1 className="title">Reservations</h1>
+      </article>
+      <div>
       </div>
       <div className="search-img">
         <Card style={{ width: '60rem' }}>
@@ -36,19 +107,31 @@ export default function Reservations() {
                 <Form.Control type="text" placeholder="Enter Reservation ID" />
               </Form.Group>
             </Form>
-            <Button variant="primary">Search</Button>
+            <Button variant="primary" text="Search" />
           </Card.Body>
         </Card>
       </div>
       <div className="form-background">
         <div className="form">
           <Card style={{ width: '50rem', backgroundColor: "white", paddingLeft: "20px", paddingRight: "20px" }}>
-            <Form>
+            <Form onSubmit={validate}>
               <Form.Group as={Col} className="mb-3" controlId="formGroupEmail">
                 <Col xs="auto">
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control size="lg" type="email" placeholder="Enter email" />
+                    <InputGroup hasValidation>
+                      <Form.Control
+                        size="lg"
+                        type="email"
+                        placeholder="Enter email"
+                        onChange={e => setEmail(e.target.value)}
+                        value={email}
+                        isInvalid={!!error.email}
+                      />
+                      <Form.Control.Feedback type="invalid" tooltip>
+                        {error.email}
+                      </Form.Control.Feedback>
+                    </InputGroup>
                     <Form.Text className="text-muted">
                       Your information is secured with us, it will never be shared.
                     </Form.Text>
@@ -57,18 +140,41 @@ export default function Reservations() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Full Name</Form.Label>
-                <Form.Control size="lg" type="name" placeholder="Full name" />
+                <InputGroup hasValidation>
+                  <Form.Control
+                    size="lg"
+                    type="name"
+                    placeholder="Full name"
+                    onChange={e => setName(e.target.value)}
+                    value={name}
+                    isInvalid={!!error.name}
+                  />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {error.name}
+                  </Form.Control.Feedback>
+                </InputGroup>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Room Selector</Form.Label>
-                <Form.Select size="lg">
+                <InputGroup hasValidation>
+                <Form.Select 
+                size="lg" 
+                onChange={e => setRoom(e.target.value)}
+                value={room}
+                isInvalid={!!error.room}
+                >
                   <option>Select a room</option>
                   <option value="1">Moon theme room</option>
                   <option value="2">Venus Theme room</option>
                   <option value="3">Jupiter Theme room</option>
                 </Form.Select>
+                <Form.Control.Feedback type="invalid" tooltip>
+                    {error.room}
+                  </Form.Control.Feedback>
+                </InputGroup>
               </Form.Group>
+
               <fieldset>
                 <Form.Group as={Col} className="mb-3">
                   <Form.Label as="legend" column xs="auto">
@@ -103,7 +209,7 @@ export default function Reservations() {
 
               <Form.Group as={Col} className="mb-3">
                 <Col xs="auto">
-                  <Button size="lg" type="submit">Book now!</Button>
+                  <Button size="lg" type="submit" text="Book now!" />
                 </Col>
               </Form.Group>
             </Form>
@@ -117,5 +223,5 @@ export default function Reservations() {
 
 
 
-  )
+  );
 };
