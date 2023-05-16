@@ -8,7 +8,7 @@ import {
 import './App.css';
 import Home from './components/Home';
 import PageLayout from "./components/PageLayout";
-import LandingPage from "./components/LandingPage";
+import LobbyPage from "./components/LobbyPage";
 import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Reservations from "./components/Reservations";
@@ -37,7 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<PageLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/landing" element={<LandingPage />} /> 
+          <Route path="/lobby" element={<LobbyPage />} /> 
           <Route path="/roomdisplay" element={<RoomDisplay />} /> 
           <Route path="/services" element={<Services />} /> 
           <Route path="/gallery" element={<Gallery />} /> 
