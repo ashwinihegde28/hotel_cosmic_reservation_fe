@@ -13,11 +13,16 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 
 export default function Reservations(props) {
+  const [reservationEmail, setReservationEmail] = useState("");
+  const [reservationID, setReservationID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
-  const [username, setUsername] = useState("");
-  const [error, setError] = useState({
+  const [reservationError, setReservationError] = useState({
+    reservationEmail: "",
+    reservationID: ""
+  });
+  const [error, setError] = useState({ 
     email: "",
     name: "",
     room: "",
@@ -28,13 +33,43 @@ export default function Reservations(props) {
     alert('A form was submitted');
   };
 
-  const handleSelectChange = (event) => {
-    console.log(event.target.value)
+  const handleReservationSubmit = () => {
+    alert('A form was submitted');
+  };
+
+
+  function validateReservation(event) {
+    event.preventDefault();
+
+    let errorExists = false;
+
+    if (reservationEmail === "") {
+      errorExists = true;
+      setReservationError(prevError => {
+        return {
+          ...prevError,
+          reservationEmail: "Please enter email"
+        };
+      });
+    }
+
+    if (reservationID === "") {
+      errorExists = true;
+      setReservationError(prevError => {
+        return {
+          ...prevError,
+          reservationID: "Please enter your reservation ID"
+        };
+      });
+    }
+    if (!errorExists) {
+      handleReservationSubmit();
+    }
   }
 
-  function validate(event) {
+
+  function validateBooking(event) {
     event.preventDefault();
-    
 
     let errorExists = false;
 
@@ -44,6 +79,16 @@ export default function Reservations(props) {
         return {
           ...prevError,
           name: "Please enter name"
+        };
+      });
+    }
+
+    if (name.trim().length < 2) {
+      errorExists = true;
+      setError(prevError => {
+        return {
+          ...prevError,
+          name: "Name must be at least 2 characters"
         };
       });
     }
@@ -58,26 +103,17 @@ export default function Reservations(props) {
       });
     }
 
-    if(room === "") {
-    errorExists = true
-      setError(prevError => {
-        return {
-          ...prevError, 
-          room: "Please select a room"
-        }
-      })
-      return
-    }
-
-    if (username === "") {
+    if (room === "") {
       errorExists = true;
       setError(prevError => {
         return {
           ...prevError,
-          username: "Please enter username"
+          room: "Please select a room"
         };
       });
+      return;
     }
+
     if (!errorExists) {
       handleSubmit();
     }
@@ -97,24 +133,47 @@ export default function Reservations(props) {
           <Card.Img variant="top" src="https://www.optics-trade.eu/blog/wp-content/uploads/2020/12/Telescope-VS-Binoculars.jpg" />
           <Card.Body>
             <Card.Title>Looking for an existing reservation?</Card.Title>
-            <Form>
+            <Form onSubmit={validateReservation}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <InputGroup hasValidation>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    onChange={e => setReservationEmail(e.target.value)}
+                    value={reservationEmail}
+                    isInvalid={!!reservationError.reservationEmail}
+                  />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {reservationError.reservationEmail}
+                  </Form.Control.Feedback>
+                </InputGroup>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Reservation ID</Form.Label>
-                <Form.Control type="text" placeholder="Enter Reservation ID" />
+                <InputGroup hasValidation>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Reservation ID"
+                    onChange={e => setReservationID(e.target.value)}
+                    value={reservationID}
+                    isInvalid={!!reservationError.reservationID}
+                  />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {reservationError.reservationID}
+                  </Form.Control.Feedback>
+                </InputGroup>
               </Form.Group>
-            </Form>
-            <Button variant="primary" text="Search" />
+              <Button variant="primary" type="submit" text="Search" />
+            </Form>         
           </Card.Body>
         </Card>
       </div>
+
       <div className="form-background">
         <div className="form">
           <Card style={{ width: '50rem', backgroundColor: "white", paddingLeft: "20px", paddingRight: "20px" }}>
-            <Form onSubmit={validate}>
+            <Form onSubmit={validateBooking}>
               <Form.Group as={Col} className="mb-3" controlId="formGroupEmail">
                 <Col xs="auto">
                   <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -158,18 +217,18 @@ export default function Reservations(props) {
               <Form.Group className="mb-3">
                 <Form.Label>Room Selector</Form.Label>
                 <InputGroup hasValidation>
-                <Form.Select 
-                size="lg" 
-                onChange={e => setRoom(e.target.value)}
-                value={room}
-                isInvalid={!!error.room}
-                >
-                  <option>Select a room</option>
-                  <option value="1">Moon theme room</option>
-                  <option value="2">Venus Theme room</option>
-                  <option value="3">Jupiter Theme room</option>
-                </Form.Select>
-                <Form.Control.Feedback type="invalid" tooltip>
+                  <Form.Select
+                    size="lg"
+                    onChange={e => setRoom(e.target.value)}
+                    value={room}
+                    isInvalid={!!error.room}
+                  >
+                    <option>Select a room</option>
+                    <option value="1">Moon theme room</option>
+                    <option value="2">Venus Theme room</option>
+                    <option value="3">Jupiter Theme room</option>
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid" tooltip>
                     {error.room}
                   </Form.Control.Feedback>
                 </InputGroup>
@@ -220,8 +279,5 @@ export default function Reservations(props) {
 
       </div>
     </p>
-
-
-
   );
 };
