@@ -3,7 +3,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import "./styles/navbar-styles.css"
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./NewFooter";
 
 
 

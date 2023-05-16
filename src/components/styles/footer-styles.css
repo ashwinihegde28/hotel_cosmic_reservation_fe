@@ -15,6 +15,7 @@
   align-items: stretch;
   gap: 2rem;
   padding: 0 1rem;
+  font-size: 1.5rem;
 }
 
 .footer a {
@@ -23,7 +24,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: .25rem;
+  
 }
 
 .footer ul {
@@ -66,4 +67,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.rect.btn {
+  stroke: #fff;
+  fill: #fff;
+  fill-opacity: 0;
+  stroke-opacity: 0;
+}
+
+.footer-link {
+  padding-right: 30px;
 }
