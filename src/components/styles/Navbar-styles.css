@@ -4,7 +4,8 @@
 
 
 .nav-title {
-  font-size: 2rem;
+  font-size: 2.0rem;
+  
 }
 
 .navbar {
@@ -23,8 +24,10 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: .25rem;
+  padding-left: 10px;
+  padding-right: 10px;
 }
+
 
 .navbar ul {
   padding: 0;
@@ -32,6 +35,7 @@
   list-style: none;
   display: flex;
   gap: 1rem;
+
 }
 
 .navbar li.active {
@@ -42,4 +46,3 @@
   background-color: #555;
   color: blue;
 }
-
