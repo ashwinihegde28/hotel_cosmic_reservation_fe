@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
 export default function RoomCards(props) {
@@ -19,7 +19,7 @@ export default function RoomCards(props) {
                 {text}
               </Card.Text>
               <Link to={link}>
-              <Button variant="primary">View Details</Button>
+              <Button variant="primary" text="View Details" />
               </Link>
             </Card.Body>
           </Card>

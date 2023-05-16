@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Button from "../components/Button";
 
 import RoomCards from './RoomCards';
 
@@ -39,7 +39,7 @@ export default function RoomDisplay2() {
           <Row>
             <div className="button-container justify-content-end">
               <Link to="/reservations">
-                <button className="room-button">Book Room</button>
+                <Button className="room-button" text="Book Room" />
               </Link>
             </div>
           </Row>

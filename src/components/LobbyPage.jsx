@@ -26,18 +26,18 @@ export default function LobbyPage() {
           text="Have a snack and a drink at any time of the day"        
           img="https://drive.google.com/uc?export=view&id=1k612ZBdfKE_NjCbdeAVq5DclVBTtKmzt"
           buttonText="View Restaurant"
-          // link="/restaurant"
+          link="/restaurant"
         />
         </Col>
       </Row>
       <Row>
       <Col className="mb-4">
         <LobbyCards
-          title="Amenities"
+          title="Services"
           text="View all that Hotel Cosmic has to offer"        
           img="https://drive.google.com/uc?export=view&id=1pdO9RJ55eMMIaLudo7kiGDwOZN_MqIGE"
-          buttonText="View Amenities"
-          // link="/services"
+          buttonText="View Services"
+          link="/services"
         />
         </Col>
         <Col className="mb-4">
@@ -46,7 +46,7 @@ export default function LobbyPage() {
           text="Relax and unwind"        
           img="https://drive.google.com/uc?export=view&id=1tk04Iah8Aig9tYBuJwum6LqMrE9loEwu"
           buttonText="View Spa"
-          // link="/spa"
+          link="/spa"
         />
         </Col>
       </Row>
