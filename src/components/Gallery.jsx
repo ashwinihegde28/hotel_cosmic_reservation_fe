@@ -12,7 +12,7 @@ export default function Services() {
 
   return (
 
-    <p className="gallery-body">
+    <div className="gallery-body">
       <div className="carousel">
 
         <Carousel>
@@ -101,7 +101,12 @@ export default function Services() {
           </Card.Body>
         </Card>
       </div>
-    </p>
+      <div className="nasa-box">
+        <div className="nasa-image">
+          <iframe src='https://mars.nasa.gov/layout/embed/image/insightweather/' width='1200' height='618' scrolling='no' frameborder='0' ></iframe>
+        </div>
+      </div>
+    </div>
 
 
   )
