@@ -8,19 +8,35 @@ export function useCustomers() {
   });
 
   useEffect(() => {
-    // Fetching customers
+    if (state.loading) {
+      // Fetching customers
+      axios({
+        method: "GET",
+        url: "/api/customers",
+      })
+        .then(({ data }) => {
+          dispatch({
+            type: "SET_CUSTOMERS",
+            payload: data,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [state.loading]);
+
+  const getCustomer = (customerId) => {
     axios({
       method: "GET",
-      url: "/api/customers",
+      url: `/api/customers/${customerId}`,
     })
       .then(({ data }) => {
         dispatch({
           type: "SET_CUSTOMERS",
-          payload: data,
+          payload: [data],
         });
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
 
   const addCustomer = (customer) => {
     // Adding a new customer
@@ -38,7 +54,7 @@ export function useCustomers() {
       .catch((err) => console.log(err));
   };
 
-  return { ...state, addCustomer };
+  return { ...state, addCustomer, getCustomer };
 }
 
 export function customersReducer(state, action) {
