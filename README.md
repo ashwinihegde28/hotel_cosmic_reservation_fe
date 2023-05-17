@@ -58,6 +58,10 @@ https://react-bootstrap.github.io/getting-started/introduction/
 Carousel doc:
 https://react-bootstrap.github.io/components/carousel/
 
+### install axios
+
+Run `npm install axios` command to install axios
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
