@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
 
-import "./styles/navbar-styles.css"
+import './styles/navbar-styles.css'
 
 export default function Navbar() {
 
