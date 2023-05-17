@@ -9,7 +9,7 @@ export function useServices() {
 
   useEffect(() => {
     if (state.loading) {
-      // Fetching services
+      // Fetching services from backend
       axios({
         method: "GET",
         url: "/api/services",
