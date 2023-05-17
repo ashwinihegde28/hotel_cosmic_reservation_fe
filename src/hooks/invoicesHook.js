@@ -25,7 +25,7 @@ export function useInvoices() {
   const addInvoice = (invoice) => {
     // Adding a new invoice
 
-    axios({
+    return axios({
       method: "POST",
       url: "/api/invoices",
       data: invoice,
@@ -35,6 +35,8 @@ export function useInvoices() {
           type: "ADD_INVOICE",
           payload: data,
         });
+        console.log(`data add invoice`, data)
+        return data
       })
       .catch((err) => console.log(err));
   };

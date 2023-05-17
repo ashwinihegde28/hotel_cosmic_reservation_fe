@@ -10,6 +10,10 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useReservations } from "../hooks/reservationHook";
+import { useCustomers } from "../hooks/customerHook";
+import { useInvoices } from "../hooks/invoicesHook";
+
+
 
 
 
@@ -37,19 +41,39 @@ export default function Reservations(props) {
     totalPrice: 0,
   });
   const { reservations, loading, addReservation } = useReservations();
+  const { addCustomer, customers } = useCustomers();
+  const { addInvoice } = useInvoices();
+  
 
-  const handleSubmit = (email, name, room) => {
+
+  const handleSubmit = () => {
+
+    // make the data an object ready for the hook
+    // set name
+    // set email
+    addCustomer({ name, email }) 
     
-    
-    addReservation(customer);
-    // Reset the form
-    setReservationData({
-      checkInDate: "",
-      checkOutDate: "",
-      customerId: "",
-      roomId: "",
-      totalPrice: 0,
+    .then((customer_id) => {
+      const { checkInDate, checkOutDate, roomId, totalPrice } = reservationData
+      let customerId = customer_id.id
+
+      addReservation({ checkInDate: '2022-04-03', checkOutDate: '2022-04-10', customerId, roomId: 2, totalPrice })
+      
+      .then((reservation_id) => {
+        let reservations_id = reservation_id
+        // must return reservations id
+        console.log(`addReservation promise succesful`)
+        // POST METHOD 
+        const description = "description here bla bla bla bla FINAL TEST FINAL TESTFINAL TESTFINAL TEST ";
+        
+        addInvoice({ reservations_id, description })
+        .then((invoiceback) => {
+            console.log(`add invoice worked`, invoiceback)
+            alert(`Reservation created!`)
+        })
+      });
     });
+
   };
 
   const handleReservationSubmit = () => {
@@ -136,7 +160,12 @@ export default function Reservations(props) {
     }
 
     if (!errorExists) {
-      handleSubmit(email, name, room);
+      // STRIPE OR CRYPTO PAYMENT CONFIRM () => {}
+      // .THEN success
+
+      // it can access data from state, no need argument
+      handleSubmit();
+      // .catch error, show error  => go back /reservations
     }
   }
 
@@ -299,6 +328,7 @@ export default function Reservations(props) {
       <div className="bottom-image">
 
       </div>
+
     </div>
   );
 };

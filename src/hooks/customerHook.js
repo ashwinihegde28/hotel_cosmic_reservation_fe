@@ -14,6 +14,7 @@ export function useCustomers() {
       url: "/api/customers",
     })
       .then(({ data }) => {
+        //console.log(`data`, data)
         dispatch({
           type: "SET_CUSTOMERS",
           payload: data,
@@ -24,18 +25,23 @@ export function useCustomers() {
 
   const addCustomer = (customer) => {
     // Adding a new customer
-    axios({
+      
+      return axios({
       method: "POST",
       url: "/api/customers",
       data: customer,
     })
       .then(({ data }) => {
+        console.log(`in add customer`, data)
         dispatch({
           type: "ADD_CUSTOMER",
           payload: data,
         });
+        
+        return data
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`error catch`,err));
+      
   };
 
   return { ...state, addCustomer };
@@ -50,6 +56,7 @@ export function customersReducer(state, action) {
         loading: false,
       };
     case "ADD_CUSTOMER":
+      console.log(`state`, state)
       return {
         ...state,
         customers: [...state.customers, action.payload],
