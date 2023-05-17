@@ -14,6 +14,7 @@ export function useInvoices() {
       url: "/api/invoices",
     })
       .then(({ data }) => {
+        console.log("data", data);
         dispatch({
           type: "SET_INVOICES",
           payload: data,
