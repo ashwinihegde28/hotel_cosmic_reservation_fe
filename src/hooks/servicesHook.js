@@ -8,19 +8,35 @@ export function useServices() {
   });
 
   useEffect(() => {
-    // Fetching services
+    if (state.loading) {
+      // Fetching services
+      axios({
+        method: "GET",
+        url: "/api/services",
+      })
+        .then(({ data }) => {
+          dispatch({
+            type: "SET_SERVICES",
+            payload: data,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [state.loading]);
+
+  const getService = (serviceId) => {
     axios({
       method: "GET",
-      url: "/api/services",
+      url: `/api/services/${serviceId}`,
     })
       .then(({ data }) => {
         dispatch({
           type: "SET_SERVICES",
-          payload: data,
+          payload: [data],
         });
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
 
   const addService = (service) => {
     // Adding a new service
@@ -38,7 +54,7 @@ export function useServices() {
       .catch((err) => console.log(err));
   };
 
-  return { ...state, addService };
+  return { ...state, addService, getService };
 }
 
 export function servicesReducer(state, action) {
