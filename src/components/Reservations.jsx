@@ -9,8 +9,8 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
-
 import { useReservations } from "../hooks/reservationHook";
+
 
 
 export default function Reservations(props) {
@@ -29,16 +29,32 @@ export default function Reservations(props) {
     room: "",
     username: ""
   });
+  const [reservationData, setReservationData] = useState({
+    checkInDate: "",
+    checkOutDate: "",
+    customerId: "",
+    roomId: "",
+    totalPrice: 0,
+  });
+  const { reservations, loading, addReservation } = useReservations();
 
   const handleSubmit = (email, name, room) => {
-    console.log(`hello`)
-    useReservations.addReservation(email, name, room)
-    alert('A form was submitted');
+    
+    
+    addReservation(customer);
+    // Reset the form
+    setReservationData({
+      checkInDate: "",
+      checkOutDate: "",
+      customerId: "",
+      roomId: "",
+      totalPrice: 0,
+    });
   };
 
   const handleReservationSubmit = () => {
     //Axios call
-    useReservations.getReservationById(reservationID)
+    //getReservationById(reservationID)
     alert('A form was submitted');
   };
 
