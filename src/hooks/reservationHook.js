@@ -38,7 +38,19 @@ export function useReservations() {
       .catch((err) => console.log(err));
   };
 
-  return { ...state, addReservation };
+  const getReservationById = (id) => {
+    // Fetching a reservation by ID
+    return axios({
+      method: "GET",
+      url: `/api/reservations/${id}`,
+    })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return { ...state, addReservation, getReservationById };
 }
 
 export function reservationsReducer(state, action) {
