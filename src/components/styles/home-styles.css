@@ -1,0 +1,26 @@
+.home-body {
+  background-image: url("../images/outer_space.gif");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background-repeat: no-repeat;
+}
+
+.home-body h1 {
+  background: linear-gradient(to right, #ebd910, #999999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.home-body h3 {
+  background: linear-gradient(to right, #ebd910, #999999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 10px;
+}

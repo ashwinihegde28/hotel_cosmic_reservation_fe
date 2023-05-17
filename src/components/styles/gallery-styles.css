@@ -1,0 +1,19 @@
+.cards {
+  padding: 30px;
+  display: flex;
+  justify-content:space-evenly;
+
+}
+
+.nasa-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+
+.nasa-box {
+  background-color: black;
+}
