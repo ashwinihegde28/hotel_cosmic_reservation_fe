@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Button from "../components/Button";
 
+
 import RoomCards from './RoomCards';
 
 import "./styles/roomdisplay-styles.css";
+
+import bedroomMoonImage from "./images/bedroom-moon.jpg";
+import bedroomVenusImage from "./images/bedroom-venus.jpg";
+import bedroomJupiterImage from "./images/bedroom-jupiter.jpg";
+
 
 export default function RoomDisplay2() {
   return (
@@ -18,21 +24,21 @@ export default function RoomDisplay2() {
 
             <RoomCards className="card-item"
               title="Welcome to the Moon"
-              img="https://drive.google.com/uc?export=view&id=1M8w1IhP7BbDG2Pfy1rlh8G7YN_17l87P"
+              img={bedroomMoonImage}
               link="/moonthemeroom"
             />
           </Row>
           <Row className="mb-4">
             <RoomCards className="card-item"
               title="Welcome to Venus"
-              img="https://drive.google.com/uc?id=18muVEVPKIuvVAOwUQieu2Pm9NqJ16HqY"
+              img={bedroomVenusImage}
               link="/venusthemeroom"
             />
           </Row>
           <Row className="mb-4">
             <RoomCards className="card-item"
               title="Welcome to Jupiter"
-              img="https://drive.google.com/uc?id=1lObWdFs0obLj0v_dLXbX2yJ7n9cQu0IH"
+              img={bedroomJupiterImage}
               link="/jupiterthemeroom"
             />
           </Row>
