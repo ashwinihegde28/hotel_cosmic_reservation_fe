@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { useReservations } from "../hooks/reservationHook";
 
 
 export default function Reservations(props) {
@@ -22,18 +23,22 @@ export default function Reservations(props) {
     reservationEmail: "",
     reservationID: ""
   });
-  const [error, setError] = useState({ 
+  const [error, setError] = useState({
     email: "",
     name: "",
     room: "",
     username: ""
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (email, name, room) => {
+    console.log(`hello`)
+    useReservations.addReservation(email, name, room)
     alert('A form was submitted');
   };
 
   const handleReservationSubmit = () => {
+    //Axios call
+    useReservations.getReservationById(reservationID)
     alert('A form was submitted');
   };
 
@@ -115,14 +120,14 @@ export default function Reservations(props) {
     }
 
     if (!errorExists) {
-      handleSubmit();
+      handleSubmit(email, name, room);
     }
   }
 
 
   return (
 
-    <p className="reservations-body">
+    <div className="reservations-body">
       <article className="top-image">
         <h1 className="title">Reservations</h1>
       </article>
@@ -165,7 +170,7 @@ export default function Reservations(props) {
                 </InputGroup>
               </Form.Group>
               <Button variant="primary" type="submit" text="Search" />
-            </Form>         
+            </Form>
           </Card.Body>
         </Card>
       </div>
@@ -278,6 +283,6 @@ export default function Reservations(props) {
       <div className="bottom-image">
 
       </div>
-    </p>
+    </div>
   );
 };
