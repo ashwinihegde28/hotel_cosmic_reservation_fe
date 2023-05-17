@@ -38,7 +38,19 @@ export function useServices() {
       .catch((err) => console.log(err));
   };
 
-  return { ...state, addService };
+  const getServiceById = (id) => {
+    // Fetching a service by ID
+    return axios({
+      method: "GET",
+      url: `/api/services/${id}`,
+    })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return { ...state, addService, getServiceById };
 }
 
 export function servicesReducer(state, action) {
