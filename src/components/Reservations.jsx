@@ -10,6 +10,10 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { useReservations } from "../hooks/reservationHook";
+import { useCustomers } from "../hooks/customerHook";
+import { useInvoices } from "../hooks/invoicesHook";
+
 
 
 export default function Reservations(props) {
@@ -28,9 +32,46 @@ export default function Reservations(props) {
     room: "",
     username: ""
   });
+  const [reservationData, setReservationData] = useState({
+    checkInDate: "",
+    checkOutDate: "",
+    customerId: "",
+    roomId: "",
+    totalPrice: 0,
+  });
+
+  const { reservations, loading, addReservation } = useReservations();
+  const { addCustomer, customers } = useCustomers();
+  const { addInvoice } = useInvoices();
+
 
   const handleSubmit = () => {
-    alert('A form was submitted');
+    
+    // make the data an object ready for the hook
+    addCustomer({ name, email }) 
+    
+    .then((customer_id) => {
+      const { checkInDate, checkOutDate, roomId, totalPrice } = reservationData
+      let customerId = customer_id.id
+
+      addReservation({ checkInDate: '2022-04-03', checkOutDate: '2022-04-10', customerId, roomId: 2, totalPrice })
+      
+      .then((reservation_id) => {
+        let reservations_id = reservation_id
+        // must return reservations id
+        console.log(`addReservation promise succesful`)
+        // POST METHOD 
+        const description = "description here bla bla bla bla FINAL TEST FINAL TESTFINAL TESTFINAL TEST ";
+        
+        addInvoice({ reservations_id, description })
+        .then((invoiceback) => {
+            console.log(`add invoice worked`, invoiceback)
+            alert(`Reservation created!`)
+        })
+      });
+    });
+
+
   };
 
   const handleReservationSubmit = () => {
@@ -122,7 +163,7 @@ export default function Reservations(props) {
 
   return (
 
-    <p className="reservations-body">
+    <div className="reservations-body">
       <article className="top-image">
         <h1 className="title">Reservations</h1>
       </article>
@@ -278,6 +319,6 @@ export default function Reservations(props) {
       <div className="bottom-image">
 
       </div>
-    </p>
+    </div>
   );
 };

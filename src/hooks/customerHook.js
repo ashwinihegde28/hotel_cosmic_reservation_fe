@@ -40,7 +40,7 @@ export function useCustomers() {
 
   const addCustomer = (customer) => {
     // Adding a new customer
-    axios({
+    return axios({
       method: "POST",
       url: "/api/customers",
       data: customer,
@@ -50,8 +50,9 @@ export function useCustomers() {
           type: "ADD_CUSTOMER",
           payload: data,
         });
+        return data
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`error catch`, err));
   };
 
   return { ...state, addCustomer, getCustomer };
