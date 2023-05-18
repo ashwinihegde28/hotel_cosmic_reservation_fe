@@ -62,6 +62,10 @@ https://react-bootstrap.github.io/components/carousel/
 
 Run `npm install axios` command to install axios
 
+## install react-calendar
+
+Run `npm install react-calendar` command to get the package
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
