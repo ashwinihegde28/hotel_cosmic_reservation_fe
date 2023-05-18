@@ -6,6 +6,8 @@ import Card from 'react-bootstrap/Card';
 import Button from "../components/Button";
 
 
+
+
 import RoomCards from './RoomCards';
 
 import "./styles/roomdisplay-styles.css";
@@ -15,13 +17,15 @@ import bedroomVenusImage from "./images/bedroom-venus.jpg";
 import bedroomJupiterImage from "./images/bedroom-jupiter.jpg";
 
 
+
 export default function RoomDisplay2() {
   return (
+    
     <p className="room-body">
+      <i class="fa-solid fa-bed" style={{color: 'black'}}></i>
       <Container>
         <Col>
           <Row className="mb-4">
-
             <RoomCards className="card-item"
               title="Welcome to the Moon"
               img={bedroomMoonImage}

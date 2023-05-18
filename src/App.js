@@ -35,6 +35,7 @@ import StripeProvider from "./providers/Stripe";
 function App() {
 
   return (
+    
     <StripeProvider>
     <Router>
       <Routes>

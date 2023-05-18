@@ -11,3 +11,47 @@
 height: 400px;
 
 }
+
+.bed-icon {
+  height: 80px;
+  width: 80px;
+  margin-right: 40px;
+  margin-left: 40px;
+
+}
+
+.bath-icon {
+  height: 80px;
+  width: 80px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.icons-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  
+}
+
+.h4-icon {
+  font-size: 4rem;
+}
+
+.li icons-container:hover {
+  color: blue;
+}
+
+.bed:hover {
+  color: blue;
+}
+
+.bath:hover {
+  color: blue;
+}
+
+/* .li icons-container:hover {
+  color: blue;
+} */
