@@ -70,14 +70,14 @@ export default function ReservationsReceipt(props) {
   useEffect(() => {
     
       
-      console.log(`reservationID`, reservationID)
+      //console.log(`reservationID`, reservationID)
     getReservationById(id)
       .then((reservation) => {
         setReservationDetails(reservation[0])
-        console.log(`reservationDetails`, reservationDetails)
+        //console.log(`reservationDetails`, reservationDetails)
         // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
         // } =  reservation 
-        console.log(`reservation`, reservation)
+        //console.log(`reservation`, reservation)
       })
   }, [])
 
@@ -105,7 +105,7 @@ export default function ReservationsReceipt(props) {
 
             addInvoice({ reservations_id, description })
               .then((invoiceback) => {
-                console.log(`add invoice worked`, invoiceback)
+                //console.log(`add invoice worked`, invoiceback)
                 alert(`Reservation created!`)
               })
           });

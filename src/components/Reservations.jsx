@@ -86,7 +86,7 @@ export default function Reservations(props) {
 
             addInvoice({ reservations_id, description })
               .then((invoiceback) => {
-                console.log(`add invoice worked`, invoiceback)
+                //console.log(`add invoice worked`, invoiceback)
                 alert(`Reservation created!`)
               })
           });
@@ -98,7 +98,7 @@ export default function Reservations(props) {
     
       // We need to call a pop up here to display the data from reservation
 
-      console.log(`reservationID reservation.jsx`, reservationID)
+      //console.log(`reservationID reservation.jsx`, reservationID)
       
       navigate(`/reservations/${reservationID}`)
       
