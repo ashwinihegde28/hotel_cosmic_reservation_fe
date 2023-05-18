@@ -34,8 +34,8 @@ export function useReservations() {
           type: "ADD_RESERVATION",
           payload: data,
         });
-        console.log(`success add reservation`)
-        console.log(`data,`, data)
+        //console.log(`success add reservation`)
+        //console.log(`data,`, data)
         return data
       })
       .catch((err) => console.log(err));
@@ -48,6 +48,7 @@ export function useReservations() {
       url: `/api/reservations/${id}`,
     })
       .then(({ data }) => {
+        console.log(`data from func`, data)
         return data;
       })
       .catch((err) => console.log(err));

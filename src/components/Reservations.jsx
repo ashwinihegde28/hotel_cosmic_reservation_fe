@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
 
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
 import "./styles/navbar-styles.css";
 import "./styles/reservations-styles.css";
+import './styles/calender.css';
 
 
 import Form from 'react-bootstrap/Form';
@@ -10,9 +14,11 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+
 import { useReservations } from "../hooks/reservationHook";
 import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
+
 
 
 
@@ -22,16 +28,19 @@ export default function Reservations(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
+  
+
   const [reservationError, setReservationError] = useState({
     reservationEmail: "",
     reservationID: ""
   });
-  const [error, setError] = useState({ 
+  const [error, setError] = useState({
     email: "",
     name: "",
     room: "",
     username: ""
   });
+  
   const [reservationData, setReservationData] = useState({
     checkInDate: "",
     checkOutDate: "",
@@ -39,43 +48,59 @@ export default function Reservations(props) {
     roomId: "",
     totalPrice: 0,
   });
+  
 
-  const { reservations, loading, addReservation } = useReservations();
-  const { addCustomer, customers } = useCustomers();
+  const [date, setDate] = useState(new Date());
+
+  const { addReservation, getReservationById } = useReservations();
+  const { addCustomer } = useCustomers();
   const { addInvoice } = useInvoices();
 
 
   const handleSubmit = () => {
-    
-    // make the data an object ready for the hook
-    addCustomer({ name, email }) 
-    
-    .then((customer_id) => {
-      const { checkInDate, checkOutDate, roomId, totalPrice } = reservationData
-      let customerId = customer_id.id
 
-      addReservation({ checkInDate: '2022-04-03', checkOutDate: '2022-04-10', customerId, roomId: 2, totalPrice })
-      
-      .then((reservation_id) => {
-        let reservations_id = reservation_id
-        // must return reservations id
-        console.log(`addReservation promise succesful`)
-        // POST METHOD 
-        const description = "description here bla bla bla bla FINAL TEST FINAL TESTFINAL TESTFINAL TEST ";
-        
-        addInvoice({ reservations_id, description })
-        .then((invoiceback) => {
-            console.log(`add invoice worked`, invoiceback)
-            alert(`Reservation created!`)
-        })
+    // make the data an object ready for the hook
+    addCustomer({ name, email })
+
+      .then((customer_id) => {
+        //We should have a calculation here Price per day * (checkOutDate - checkInDate)
+        const { totalPrice } = reservationData
+        let customerId = customer_id.id
+
+        addReservation({ checkInDate: date[0], checkOutDate: date[1], customerId, roomId: room, totalPrice })
+
+          .then((reservations_id) => {
+            // must return reservations id
+            //console.log(`addReservation promise succesful`)
+            // POST METHOD 
+            const description = "description here bla bla bla bla FINAL TEST FINAL TESTFINAL TESTFINAL TEST ";
+
+            addInvoice({ reservations_id, description })
+              .then((invoiceback) => {
+                //console.log(`add invoice worked`, invoiceback)
+                alert(`Reservation created!`)
+              })
+          });
       });
-    });
 
 
   };
 
   const handleReservationSubmit = () => {
-    alert('A form was submitted');
+    // reservationID, reservationEmail
+    getReservationById(reservationID)
+    .then((reservation) => {
+
+
+      // We need to call a pop up here to display the data from reservation
+
+      // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
+      //} =  reservation 
+      alert(`Reservation is :`)
+      
+      
+    })
+    
   };
 
 
@@ -190,7 +215,7 @@ export default function Reservations(props) {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="formBasicReservationId">
                 <Form.Label>Reservation ID</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -206,7 +231,7 @@ export default function Reservations(props) {
                 </InputGroup>
               </Form.Group>
               <Button variant="primary" type="submit" text="Search" />
-            </Form>         
+            </Form>
           </Card.Body>
         </Card>
       </div>
@@ -274,8 +299,31 @@ export default function Reservations(props) {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-
-              <fieldset>
+              <div className='calender'>
+                <h1 className='text-center'>Choose your arrival and departure date</h1>
+                <div className='calendar-container'>
+                  <Calendar
+                    onChange={setDate}
+                    value={date}
+                    selectRange={true}
+                    minDate={new Date(2023, 5, 16)}
+                  />
+                </div>
+                {date.length > 0 ? (
+                  <p className='text-center'>
+                    <span className='bold'>Start:</span>{' '}
+                    {date[0].toDateString()}
+                    &nbsp;|&nbsp;
+                    <span className='bold'>End:</span> {date[1].toDateString()}
+                  </p>
+                ) : (
+                  <p className='text-center'>
+                    <span className='bold'>Default selected date:</span>{' '}
+                    {date.toDateString()}
+                  </p>
+                )}
+              </div>
+              {/* <fieldset>
                 <Form.Group as={Col} className="mb-3">
                   <Form.Label as="legend" column xs="auto">
                     Activities
@@ -285,27 +333,22 @@ export default function Reservations(props) {
                       <Form.Check
                         type="switch"
                         id="custom-switch1"
-                        label="Mars rover tour"
+                        label="Massage"
                       />
                       <Form.Check
                         type="switch"
                         id="custom-switch2"
-                        label="Visit the SpaceX base"
+                        label="Facial"
                       />
                       <Form.Check
                         type="switch"
                         id="custom-switch3"
-                        label="Relaxation in the stars (spa)"
-                      />
-                      <Form.Check
-                        type="switch"
-                        id="custom-switch4"
-                        label="Visit the Mars biodome"
+                        label="Mars Mud bath"
                       />
                     </Form>
                   </Col>
                 </Form.Group>
-              </fieldset>
+              </fieldset> */}
 
               <Form.Group as={Col} className="mb-3">
                 <Col xs="auto">
