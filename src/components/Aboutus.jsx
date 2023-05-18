@@ -13,7 +13,7 @@ export default function Aboutus() {
 
   return (
 
-    <p className="aboutus-body">
+    <div className="aboutus-body">
       <article className="top-image-aboutus">
         <h1 className="title-aboutus">About us</h1>
       </article>
@@ -58,7 +58,7 @@ export default function Aboutus() {
           </Container>
         </p>
       </div>
-    </p>
+    </div>
 
   )
 };

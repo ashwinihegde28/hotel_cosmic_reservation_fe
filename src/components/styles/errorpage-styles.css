@@ -1,6 +1,6 @@
-.top-image-aboutus {
-  background-image: url("../images/lounge4.png");
-  height: 1000px;
+.top-image-errorpage{
+  background-image: url("../images/nebula.jpg");
+  height: 1280px;
   box-sizing: border-box;
   background-size: cover;
   background-repeat: no-repeat;
@@ -8,10 +8,10 @@
   background-position: center;
 }
 
-.title-aboutus {
-  font-size: 80px;
-  color: white;
+.title-errorpage {
+  font-size: 60px;
+  color: whitesmoke;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 300px;
 
 }

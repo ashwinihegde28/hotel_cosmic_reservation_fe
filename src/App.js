@@ -17,6 +17,7 @@ import RoomDisplay from "./components/RoomDisplay";
 import MoonThemeRoom from "./components/MoonThemeRoom";
 import VenusThemeRoom from "./components/VenusThemeRoom";
 import JupiterThemeRoom from "./components/JupiterThemeRoom";
+import ErrorPage from "./components/ErrorPage";
 
 
 import "./components/styles/navbar-styles.css"
@@ -47,7 +48,8 @@ function App() {
           <Route path="/aboutus" element={<Aboutus />} /> 
           <Route path="/moonthemeroom" element={<MoonThemeRoom />} /> 
           <Route path="/venusthemeroom" element={<VenusThemeRoom />} /> 
-          <Route path="/jupiterthemeroom" element={<JupiterThemeRoom />} /> 
+          <Route path="/jupiterthemeroom" element={<JupiterThemeRoom />} />
+          <Route path="/*" element={<ErrorPage />} /> 
         </Route>
         
       </Routes>
