@@ -12,6 +12,7 @@ import LobbyPage from "./components/LobbyPage";
 import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Reservations from "./components/Reservations";
+import ReservationsReceipt from "./components/ReservationsReceipt";
 import Aboutus from "./components/Aboutus";
 import RoomDisplay from "./components/RoomDisplay";
 import MoonThemeRoom from "./components/MoonThemeRoom";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/services" element={<Services />} /> 
           <Route path="/gallery" element={<Gallery />} /> 
           <Route path="/reservations" element={<Reservations />} /> 
+          <Route path="/reservations/:id" element={<ReservationsReceipt />} />
           <Route path="/aboutus" element={<Aboutus />} /> 
           <Route path="/moonthemeroom" element={<MoonThemeRoom />} /> 
           <Route path="/venusthemeroom" element={<VenusThemeRoom />} /> 
