@@ -66,7 +66,14 @@ Run `npm install axios` command to install axios
 
 Run `npm install react-calendar` command to get the package
 
+### install font Awesome
+
+Run `npm i --save @fortawesome/fontawesome-svg-core`
+Run `npm install --save @fortawesome/free-solid-svg-icons`
+Run `npm install --save @fortawesome/react-fontawesome`
+
 ## Learn More
+
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
