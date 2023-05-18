@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 
 
@@ -22,14 +23,21 @@ export default function Reservations(props) {
     reservationEmail: "",
     reservationID: ""
   });
-  const [error, setError] = useState({ 
+  const [error, setError] = useState({
     email: "",
     name: "",
     room: "",
-    username: ""
+    username: "",
+    card: ""
   });
+  // for invoice
+  const [showInvoice, setShowInvoice] = useState(false);
+  const [invoiceData, setInvoiceData] = useState(null);
 
-  const handleSubmit = () => {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = (data) => {
     alert('A form was submitted');
   };
 
@@ -68,7 +76,7 @@ export default function Reservations(props) {
   }
 
 
-  function validateBooking(event) {
+  async function validateBooking(event) {
     event.preventDefault();
 
     let errorExists = false;
@@ -111,12 +119,49 @@ export default function Reservations(props) {
           room: "Please select a room"
         };
       });
+      // return;
+    }
+
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet. Make sure to disable
+      // form submission until Stripe.js has loaded.
       return;
     }
 
-    if (!errorExists) {
-      handleSubmit();
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const card = elements.getElement(CardElement);
+
+    if (card == null) {
+      return;
     }
+
+    // Use your card Element with other Stripe.js APIs
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card,
+    });
+
+    if (error) {
+      console.log('[error]', error);
+      setError(prevError => {
+        return {
+          ...prevError,
+          card: error.message
+        };
+      });
+      return
+    } else {
+      console.log('[PaymentMethod]', paymentMethod);
+    }
+
+    if (!errorExists) {
+
+      handleSubmit({name, email, room, card: paymentMethod.id});
+    }
+
+    //upon payment success...
   }
 
 
@@ -165,7 +210,7 @@ export default function Reservations(props) {
                 </InputGroup>
               </Form.Group>
               <Button variant="primary" type="submit" text="Search" />
-            </Form>         
+            </Form>
           </Card.Body>
         </Card>
       </div>
@@ -266,6 +311,33 @@ export default function Reservations(props) {
                 </Form.Group>
               </fieldset>
 
+              <Form.Group className="mb-3" >
+                <Form.Label>Payment Information</Form.Label>
+                <CardElement
+                options={{
+                  style: {
+                    base: {
+                      fontSize: '16px',
+                      color: '#424770',
+                      '::placeholder': {
+                        color: '#aab7c4',
+                      },
+                    },
+                    invalid: {
+                      color: '#9e2146',
+                    },
+                  },
+                }}
+              />
+                {/* <InputGroup hasValidation>
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {error.card}
+                  </Form.Control.Feedback>
+                </InputGroup> */}
+                {error.card && (<div>{error.card}</div>) }
+              </Form.Group>
+
+              
               <Form.Group as={Col} className="mb-3">
                 <Col xs="auto">
                   <Button size="lg" type="submit" text="Book now!" />

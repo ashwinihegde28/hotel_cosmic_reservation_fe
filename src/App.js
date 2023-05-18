@@ -21,6 +21,7 @@ import JupiterThemeRoom from "./components/JupiterThemeRoom";
 
 import "./components/styles/navbar-styles.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import StripeProvider from "./providers/Stripe";
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -33,6 +34,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   return (
+    <StripeProvider>
     <Router>
       <Routes>
         <Route path="/" element={<PageLayout />}>
@@ -50,6 +52,7 @@ function App() {
         
       </Routes>
     </Router>
+    </StripeProvider>
   );
 };
 
