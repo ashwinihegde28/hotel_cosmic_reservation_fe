@@ -21,6 +21,7 @@ import { useReservations } from "../hooks/reservationHook";
 import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
 
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -30,7 +31,7 @@ export default function Reservations(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
-  
+  const navigate = useNavigate();
 
   const [reservationError, setReservationError] = useState({
     reservationEmail: "",
@@ -67,11 +68,12 @@ export default function Reservations(props) {
 
   const handleSubmit = () => {
  // if statement if successful payment
-    // make the data an object ready for the hook
+    
     addCustomer({ name, email })
 
       .then((customer_id) => {
         //We should have a calculation here Price per day * (checkOutDate - checkInDate)
+        
         const { totalPrice } = reservationData
         let customerId = customer_id.id
 
@@ -79,36 +81,27 @@ export default function Reservations(props) {
 
           .then((reservations_id) => {
             // must return reservations id
-            //console.log(`addReservation promise succesful`)
-            // POST METHOD 
+             
             const description = "description here bla bla bla bla FINAL TEST FINAL TESTFINAL TESTFINAL TEST ";
 
             addInvoice({ reservations_id, description })
               .then((invoiceback) => {
-                console.log(`add invoice worked`, invoiceback)
+                // Pop up here to display invoice
                 alert(`Reservation created!`)
               })
           });
       });
-
-
   };
 
   const handleReservationSubmit = () => {
     // reservationID, reservationEmail
-    getReservationById(reservationID)
-    .then((reservation) => {
-
-
+    
       // We need to call a pop up here to display the data from reservation
 
-      // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
-      //} =  reservation 
-      alert(`Reservation is :`)
+      //console.log(`reservationID reservation.jsx`, reservationID)
       
+      navigate(`/reservations/${reservationID}`)
       
-    })
-    
   };
 
 
