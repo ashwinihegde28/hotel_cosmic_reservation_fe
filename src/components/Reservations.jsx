@@ -13,7 +13,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import customerPayment from "../hooks/stripe_payment";
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -67,7 +67,7 @@ export default function Reservations(props) {
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // if successful payment
     const card = elements.getElement(CardElement);
     const amount = 5000;
@@ -75,23 +75,21 @@ export default function Reservations(props) {
     const paymentMethod = "card";
 
 
-    customerPayment({ amount, currency, paymentMethod })
+    await customerPayment({ amount, currency, paymentMethod })
       .then(clientSecret => {
         // Use the clientSecret for the client-side payment flow
-        console.log('Client secret:', clientSecret);
 
         // Call the Stripe.js function to confirm the payment using the clientSecret
         stripe.confirmCardPayment(clientSecret, {
           payment_method: {
-            card: card // Replace with your CardElement
+            card: card
           }
         }).then(result => {
           // Handle the payment result
           if (result.error) {
             console.error('Payment failed:', result.error.message);
           } else if (result.paymentIntent.status === 'succeeded') {
-            console.log('Payment succeeded');
-            
+            //needs to be discussed
           }
         }).catch(error => {
           console.error('Error confirming payment:', error);
@@ -101,16 +99,14 @@ export default function Reservations(props) {
         console.error('Payment intent creation failed:', error);
       });
 
-
-
     // make the data an object ready for the hook
-    addCustomer({ name, email })
+    await addCustomer({ name, email })
 
-      .then((customer_id) => {
+      .then((customer) => {
         //We should have a calculation here Price per day * (checkOutDate - checkInDate)
         const { totalPrice } = reservationData;
-        // console.log("________", customer_id.id);
-        let customerId = customer_id.id;
+        let customerId = customer.id;
+
 
         addReservation({ checkInDate: date[0], checkOutDate: date[1], customerId, roomId: room, totalPrice })
 
@@ -148,7 +144,6 @@ export default function Reservations(props) {
       });
 
   };
-
 
   function validateReservation(event) {
     event.preventDefault();
@@ -227,11 +222,8 @@ export default function Reservations(props) {
     }
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
-
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
     // each type of element.
@@ -240,7 +232,6 @@ export default function Reservations(props) {
     if (card == null) {
       return;
     }
-
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
@@ -261,11 +252,8 @@ export default function Reservations(props) {
     }
 
     if (!errorExists) {
-
       handleSubmit({ name, email, room, card: paymentMethod.id });
     }
-
-    //upon payment success...
   }
 
 
