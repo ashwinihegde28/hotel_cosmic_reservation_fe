@@ -71,6 +71,15 @@ Run `npm install react-calendar` command to get the package
 Run `npm i --save @fortawesome/fontawesome-svg-core`
 Run `npm install --save @fortawesome/free-solid-svg-icons`
 Run `npm install --save @fortawesome/react-fontawesome`
+## install stripe
+
+Run on the front end `npm install --save @stripe/react-stripe-js @stripe/stripe-js`
+
+Run on the back end `npm install stripe --save`
+
+## install pg native
+
+Run on the back end `npm install pg-native`
 
 ## Learn More
 
