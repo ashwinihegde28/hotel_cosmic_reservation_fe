@@ -18,6 +18,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useReservations } from "../hooks/reservationHook";
 import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
+import { useRooms } from "../hooks/roomsHook";
 
 import { useNavigate } from "react-router-dom";
 
@@ -59,6 +60,7 @@ export default function Reservations(props) {
   const { addReservation, getReservationById } = useReservations();
   const { addCustomer } = useCustomers();
   const { addInvoice } = useInvoices();
+  const { rooms, loading, getRoomById } = useRooms();
 
   const handleSubmit = () => {
     // if statement if successful payment
@@ -76,7 +78,7 @@ export default function Reservations(props) {
         roomId: room,
         totalPrice,
       }).then((reservations) => {
-        // must return reservations id
+        // must return reservations
 
         const description = `${name},${email},Moon Room`;
         const reservations_id = reservations.id;
@@ -330,9 +332,15 @@ export default function Reservations(props) {
                     isInvalid={!!error.room}
                   >
                     <option>Select a room</option>
+                    {rooms.map((room) => (
+                      <option key={room.id} value={room.id}>
+                        {room.type}
+                      </option>
+                    ))}
+                    {/* <option>Select a room</option>
                     <option value="1">Moon theme room</option>
                     <option value="2">Venus Theme room</option>
-                    <option value="3">Jupiter Theme room</option>
+                    <option value="3">Jupiter Theme room</option> */}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid" tooltip>
                     {error.room}
