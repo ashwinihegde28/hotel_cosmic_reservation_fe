@@ -472,14 +472,14 @@ export default function Reservations(props) {
           </Card >
         </div >
       </div >
-      {/* <div>
+      <div>
         {showInvoice && (
           <InvoicePopup
             invoiceData={newInvoice}
             setShowInvoice={setShowInvoice}
           />
         )}
-      </div> */}
+      </div>
       <div className="bottom-image"></div>
     </div >
   );
