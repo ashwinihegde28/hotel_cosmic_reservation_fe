@@ -8,7 +8,13 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import { useNasa } from "../hooks/nasaHook";
+
+//const image = '';
+
 export default function Services() {
+  const nasaData = useNasa();
+
 
   return (
 
@@ -103,7 +109,22 @@ export default function Services() {
       </div>
       <div className="nasa-box">
         <div className="nasa-image">
-        <iframe src='https://mars.nasa.gov/layout/embed/image/mslweather/' width='1200' height='620'  scrolling='no' frameborder='0'></iframe>
+          <iframe src='https://mars.nasa.gov/layout/embed/image/mslweather/' width='1200' height='620' scrolling='no' frameborder='0'></iframe>
+        </div>
+      </div>
+      <div className="api-container">
+        <div className="api-title">
+          {nasaData.title}
+        </div>
+        <div className="api-image-box">
+          <img className="api-image" src={nasaData.hdurl}></img>
+        </div>
+        <div className="api-description">
+          <div className="api-author">
+          {nasaData.copyright}
+          </div>
+          <br></br>
+          {nasaData.explanation}
         </div>
       </div>
     </div>
