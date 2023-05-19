@@ -1,0 +1,18 @@
+import { useEffect, useReducer } from "react";
+import axios from "axios";
+
+export default async function customerPayment(paymentdetails) {
+  // Adding a new customer
+  // need this data
+  // amount, currency, paymentMethod
+  return await axios({
+    method: "POST",
+    url: "/api/payments",
+    data: paymentdetails,
+  })
+    .then(({ data }) => {
+      return data
+    })
+    .catch((err) => console.log(`error catch`, err));
+};
+
