@@ -23,6 +23,7 @@ import Casino from "./components/Casino";
 import Bar from "./components/Bar";
 import SportsBar from "./components/SportsBar";
 import Restaurant from "./components/Restaurant";
+import Search from "./components/Search";
 
 import "./components/styles/navbar-styles.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -60,6 +61,7 @@ function App() {
           <Route path="/bar" element={<Bar />} />
           <Route path="/sportsbar" element={<SportsBar />} />
           <Route path="/restaurant" element={<Restaurant />} />
+          <Route path="/reservations/search" element={<Search />} />
           <Route path="/*" element={<ErrorPage />} /> 
         </Route>
         

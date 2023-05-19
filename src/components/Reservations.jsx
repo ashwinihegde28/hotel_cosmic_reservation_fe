@@ -2,28 +2,31 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import InvoicePopup from "./Invoice";
 
+import Accordion from 'react-bootstrap/Accordion';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import "./styles/navbar-styles.css";
 import "./styles/reservations-styles.css";
-import "./styles/calender.css";
+import './styles/calender.css';
 
-import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import customerPayment from "../hooks/stripe_payment";
+import { loadStripe } from '@stripe/stripe-js';
 
 import { useReservations } from "../hooks/reservationHook";
 import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
-import { useRooms } from "../hooks/roomsHook";
 
 import { useNavigate } from "react-router-dom";
 
 export default function Reservations(props) {
-  const [reservationEmail, setReservationEmail] = useState("");
+  //const [reservationEmail, setReservationEmail] = useState("");
   const [reservationID, setReservationID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,10 +35,10 @@ export default function Reservations(props) {
   const [showInvoice, setShowInvoice] = useState(false);
   const [newInvoice, setNewInvoice] = useState(null);
 
-  const [reservationError, setReservationError] = useState({
-    reservationEmail: "",
-    reservationID: "",
-  });
+  // const [reservationError, setReservationError] = useState({
+  //   reservationEmail: "",
+  //   reservationID: "",
+  // });
   const [error, setError] = useState({
     email: "",
     name: "",
@@ -58,79 +61,125 @@ export default function Reservations(props) {
   const [date, setDate] = useState(new Date());
 
   const { addReservation, getReservationById } = useReservations();
-  const { addCustomer, customers } = useCustomers();
+  const { addCustomer } = useCustomers();
   const { addInvoice } = useInvoices();
-  const { rooms, loading, getRoomById } = useRooms();
 
-  const handleSubmit = () => {
-    // if statement if successful payment
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-    addCustomer({ name, email }).then((customer_id) => {
-      //We should have a calculation here Price per day * (checkOutDate - checkInDate)
+  const handleSubmit = async () => {
+    // if successful payment
+    const card = elements.getElement(CardElement);
+    const amount = 5000;
+    const currency = "CAD";
+    const paymentMethod = "card";
 
-      //const { totalPrice } = reservationData;
-      let customerId = customer_id.id;
-      const totalPrice = 80.0;
-      addReservation({
-        checkInDate: date[0],
-        checkOutDate: date[1],
-        customerId,
-        roomId: room,
-        totalPrice,
-      }).then((reservations) => {
-        // must return reservations
 
-        const description = `${name},${email},Moon Room`;
-        const reservations_id = reservations.id;
+    await customerPayment({ amount, currency, paymentMethod })
+      .then(clientSecret => {
+        // Use the clientSecret for the client-side payment flow
 
-        addInvoice({ reservations_id, description }).then((newInvoice1) => {
-          // prepare data for Invoice Pop up and display
-          // set entire invoice object to the newInvoice state to use it later.
-          setNewInvoice(newInvoice1);
-          setShowInvoice(true);
+        // Call the Stripe.js function to confirm the payment using the clientSecret
+        stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: card
+          }
+        }).then(result => {
+          // Handle the payment result
+          if (result.error) {
+            console.error('Payment failed:', result.error.message);
+          } else if (result.paymentIntent.status === 'succeeded') {
+            //needs to be discussed
+            //console.log('Payment sucess')
+          }
+        }).catch(error => {
+          console.error('Error confirming payment:', error);
+        });
+      })
+      .catch(error => {
+        console.error('Payment intent creation failed:', error);
+      });
+
+    // make the data an object ready for the hook
+    await addCustomer({ name, email })
+
+      .then((customer) => {
+        //We should have a calculation here Price per day * (checkOutDate - checkInDate)
+        const { totalPrice } = reservationData;
+        let customerId = customer.id;
+
+
+        //const { totalPrice } = reservationData;
+
+        // const totalPrice = 80.0;
+        addReservation({
+          checkInDate: date[0],
+          checkOutDate: date[1],
+          customerId,
+          roomId: room,
+          totalPrice,
+        }).then((reservations) => {
+          // must return reservations id
+
+          const description = `${name},${email},Moon Room`;
+          const reservations_id = reservations.id;
+
+          addInvoice({ reservations_id, description }).then((newInvoice1) => {
+            // prepare data for Invoice Pop up and display
+            // set entire invoice object to the newInvoice state to use it later.
+            setNewInvoice(newInvoice1);
+            setShowInvoice(true);
+            alert("Reserviation booked!")
+          });
         });
       });
-    });
   };
 
-  const handleReservationSubmit = () => {
-    // reservationID, reservationEmail
+  // const handleReservationSubmit = () => {
+  //   // reservationID, reservationEmail
+  //   getReservationById(reservationID)
+  //     .then((reservation) => {
 
-    // We need to call a pop up here to display the data from reservation
+  //       // We need to call a pop up here to display the data from reservation
 
-    //console.log(`reservationID reservation.jsx`, reservationID)
+  //       // We need to call a pop up here to display the data from reservation
 
-    navigate(`/reservations/${reservationID}`);
-  };
+  //       // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
+  //       //} =  reservation 
+  //       alert(`Reservation is :`);
 
-  function validateReservation(event) {
-    event.preventDefault();
 
-    let errorExists = false;
+  //     });
 
-    if (reservationEmail === "") {
-      errorExists = true;
-      setReservationError((prevError) => {
-        return {
-          ...prevError,
-          reservationEmail: "Please enter email",
-        };
-      });
-    }
+  // };
 
-    if (reservationID === "") {
-      errorExists = true;
-      setReservationError((prevError) => {
-        return {
-          ...prevError,
-          reservationID: "Please enter your reservation ID",
-        };
-      });
-    }
-    if (!errorExists) {
-      handleReservationSubmit();
-    }
-  }
+  // function validateReservation(event) {
+  //   event.preventDefault();
+
+  //   let errorExists = false;
+
+  //   if (reservationEmail === "") {
+  //     errorExists = true;
+  //     setReservationError((prevError) => {
+  //       return {
+  //         ...prevError,
+  //         reservationEmail: "Please enter email",
+  //       };
+  //     });
+  //   }
+
+  //   if (reservationID === "") {
+  //     errorExists = true;
+  //     setReservationError((prevError) => {
+  //       return {
+  //         ...prevError,
+  //         reservationID: "Please enter your reservation ID",
+  //       };
+  //     });
+  //   }
+  //   if (!errorExists) {
+  //     handleReservationSubmit();
+  //   }
+  // }
 
   async function validateBooking(event) {
     event.preventDefault();
@@ -179,11 +228,8 @@ export default function Reservations(props) {
     }
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
-
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
     // each type of element.
@@ -192,7 +238,6 @@ export default function Reservations(props) {
     if (card == null) {
       return;
     }
-
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -215,8 +260,6 @@ export default function Reservations(props) {
     if (!errorExists) {
       handleSubmit({ name, email, room, card: paymentMethod.id });
     }
-
-    //upon payment success...
   }
 
   return (
@@ -224,8 +267,8 @@ export default function Reservations(props) {
       <article className="top-image">
         <h1 className="title">Reservations</h1>
       </article>
-      <div></div>
-      <div className="search-img">
+
+      {/* <div className="search-img">
         <Card style={{ width: "60rem" }}>
           <Card.Img
             variant="top"
@@ -268,7 +311,7 @@ export default function Reservations(props) {
             </Form>
           </Card.Body>
         </Card>
-      </div>
+      </div> */}
 
       <div className="form-background">
         <div className="form">
@@ -332,48 +375,48 @@ export default function Reservations(props) {
                     isInvalid={!!error.room}
                   >
                     <option>Select a room</option>
-                    {rooms.map((room) => (
-                      <option key={room.id} value={room.id}>
-                        {room.type}
-                      </option>
-                    ))}
-                    {/* <option>Select a room</option>
                     <option value="1">Moon theme room</option>
                     <option value="2">Venus Theme room</option>
-                    <option value="3">Jupiter Theme room</option> */}
+                    <option value="3">Jupiter Theme room</option>
                   </Form.Select>
                   <Form.Control.Feedback type="invalid" tooltip>
                     {error.room}
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-              <div className="calender">
-                <h1 className="text-center">
-                  Choose your arrival and departure date
-                </h1>
-                <div className="calendar-container">
-                  <Calendar
-                    onChange={setDate}
-                    value={date}
-                    selectRange={true}
-                    minDate={new Date(2023, 5, 16)}
-                  />
-                </div>
-                {date.length > 0 ? (
-                  <p className="text-center">
-                    <span className="bold">Start:</span>{" "}
-                    {date[0].toDateString()}
-                    &nbsp;|&nbsp;
-                    <span className="bold">End:</span> {date[1].toDateString()}
-                  </p>
-                ) : (
-                  <p className="text-center">
-                    <span className="bold">Default selected date:</span>{" "}
-                    {date.toDateString()}
-                  </p>
-                )}
-              </div>
-
+              <Accordion>
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Calender</Accordion.Header>
+                  <Accordion.Body>
+                    <div className="calender">
+                      <h1 className="text-center">
+                        Choose your arrival and departure date
+                      </h1>
+                      <div className="calendar-container">
+                        <Calendar
+                          onChange={setDate}
+                          value={date}
+                          selectRange={true}
+                          minDate={new Date(2023, 5, 16)}
+                        />
+                      </div>
+                      {date.length > 0 ? (
+                        <p className="text-center">
+                          <span className="bold">Start:</span>{" "}
+                          {date[0].toDateString()}
+                          &nbsp;|&nbsp;
+                          <span className="bold">End:</span> {date[1].toDateString()}
+                        </p>
+                      ) : (
+                        <p className="text-center">
+                          <span className="bold">Default selected date:</span>{" "}
+                          {date.toDateString()}
+                        </p>
+                      )}
+                    </div>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
               {/* <fieldset>
                 <Form.Group as={Col} className="mb-3">
                   <Form.Label as="legend" column xs="auto">
@@ -424,27 +467,27 @@ export default function Reservations(props) {
                     {error.card}
                   </Form.Control.Feedback>
                 </InputGroup> */}
-                {error.card && <div>{error.card}</div>}
+                {error.card && (<div>{error.card}</div>)}
               </Form.Group>
+
 
               <Form.Group as={Col} className="mb-3">
                 <Col xs="auto">
                   <Button size="lg" type="submit" text="Book now!" />
                 </Col>
               </Form.Group>
-            </Form>
-          </Card>
-        </div>
-      </div>
-      <div>
+            </Form >
+          </Card >
+        </div >
+      </div >
+      {/* <div>
         {showInvoice && (
           <InvoicePopup
             invoiceData={newInvoice}
             setShowInvoice={setShowInvoice}
           />
         )}
-      </div>
-      {/* <div className="bottom-image"></div> */}
-    </div>
+      </div> */}
+    </div >
   );
 }
