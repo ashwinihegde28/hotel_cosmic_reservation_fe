@@ -89,6 +89,7 @@ export default function Reservations(props) {
             console.error('Payment failed:', result.error.message);
           } else if (result.paymentIntent.status === 'succeeded') {
             //needs to be discussed
+            console.log('Payment sucess')
           }
         }).catch(error => {
           console.error('Error confirming payment:', error);
