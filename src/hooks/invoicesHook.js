@@ -14,7 +14,6 @@ export function useInvoices() {
       url: "/api/invoices",
     })
       .then(({ data }) => {
-        //console.log("data", data);
         dispatch({
           type: "SET_INVOICES",
           payload: data,
@@ -36,8 +35,8 @@ export function useInvoices() {
           type: "ADD_INVOICE",
           payload: data,
         });
-        //console.log(`data add invoice`, data)
-        return data
+
+        return data;
       })
       .catch((err) => console.log(err));
   };
