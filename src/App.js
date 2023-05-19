@@ -18,11 +18,16 @@ import MoonThemeRoom from "./components/MoonThemeRoom";
 import VenusThemeRoom from "./components/VenusThemeRoom";
 import JupiterThemeRoom from "./components/JupiterThemeRoom";
 import ErrorPage from "./components/ErrorPage";
-
+import SpaPage from "./components/SpaPage";
+import Casino from "./components/Casino";
+import Bar from "./components/Bar";
+import SportsBar from "./components/SportsBar";
+import Restaurant from "./components/Restaurant";
 
 import "./components/styles/navbar-styles.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StripeProvider from "./providers/Stripe";
+
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -50,6 +55,11 @@ function App() {
           <Route path="/moonthemeroom" element={<MoonThemeRoom />} /> 
           <Route path="/venusthemeroom" element={<VenusThemeRoom />} /> 
           <Route path="/jupiterthemeroom" element={<JupiterThemeRoom />} />
+          <Route path="/spa" element={<SpaPage />} />
+          <Route path="/casino" element={<Casino />} />
+          <Route path="/bar" element={<Bar />} />
+          <Route path="/sportsbar" element={<SportsBar />} />
+          <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/*" element={<ErrorPage />} /> 
         </Route>
         
