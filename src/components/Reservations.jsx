@@ -25,7 +25,7 @@ import { useInvoices } from "../hooks/invoicesHook";
 import { useNavigate } from "react-router-dom";
 
 export default function Reservations(props) {
-  const [reservationEmail, setReservationEmail] = useState("");
+  //const [reservationEmail, setReservationEmail] = useState("");
   const [reservationID, setReservationID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,10 +34,10 @@ export default function Reservations(props) {
   const [showInvoice, setShowInvoice] = useState(false);
   const [newInvoice, setNewInvoice] = useState(null);
 
-  const [reservationError, setReservationError] = useState({
-    reservationEmail: "",
-    reservationID: "",
-  });
+  // const [reservationError, setReservationError] = useState({
+  //   reservationEmail: "",
+  //   reservationID: "",
+  // });
   const [error, setError] = useState({
     email: "",
     name: "",
@@ -132,52 +132,52 @@ export default function Reservations(props) {
       });
   };
 
-  const handleReservationSubmit = () => {
-    // reservationID, reservationEmail
-    getReservationById(reservationID)
-      .then((reservation) => {
+  // const handleReservationSubmit = () => {
+  //   // reservationID, reservationEmail
+  //   getReservationById(reservationID)
+  //     .then((reservation) => {
 
-        // We need to call a pop up here to display the data from reservation
+  //       // We need to call a pop up here to display the data from reservation
 
-        // We need to call a pop up here to display the data from reservation
+  //       // We need to call a pop up here to display the data from reservation
 
-        // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
-        //} =  reservation 
-        alert(`Reservation is :`);
+  //       // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
+  //       //} =  reservation 
+  //       alert(`Reservation is :`);
 
 
-      });
+  //     });
 
-  };
+  // };
 
-  function validateReservation(event) {
-    event.preventDefault();
+  // function validateReservation(event) {
+  //   event.preventDefault();
 
-    let errorExists = false;
+  //   let errorExists = false;
 
-    if (reservationEmail === "") {
-      errorExists = true;
-      setReservationError((prevError) => {
-        return {
-          ...prevError,
-          reservationEmail: "Please enter email",
-        };
-      });
-    }
+  //   if (reservationEmail === "") {
+  //     errorExists = true;
+  //     setReservationError((prevError) => {
+  //       return {
+  //         ...prevError,
+  //         reservationEmail: "Please enter email",
+  //       };
+  //     });
+  //   }
 
-    if (reservationID === "") {
-      errorExists = true;
-      setReservationError((prevError) => {
-        return {
-          ...prevError,
-          reservationID: "Please enter your reservation ID",
-        };
-      });
-    }
-    if (!errorExists) {
-      handleReservationSubmit();
-    }
-  }
+  //   if (reservationID === "") {
+  //     errorExists = true;
+  //     setReservationError((prevError) => {
+  //       return {
+  //         ...prevError,
+  //         reservationID: "Please enter your reservation ID",
+  //       };
+  //     });
+  //   }
+  //   if (!errorExists) {
+  //     handleReservationSubmit();
+  //   }
+  // }
 
   async function validateBooking(event) {
     event.preventDefault();
@@ -265,8 +265,8 @@ export default function Reservations(props) {
       <article className="top-image">
         <h1 className="title">Reservations</h1>
       </article>
-      <div></div>
-      <div className="search-img">
+      
+      {/* <div className="search-img">
         <Card style={{ width: "60rem" }}>
           <Card.Img
             variant="top"
@@ -309,7 +309,7 @@ export default function Reservations(props) {
             </Form>
           </Card.Body>
         </Card>
-      </div>
+      </div> */}
 
       <div className="form-background">
         <div className="form">
@@ -480,7 +480,6 @@ export default function Reservations(props) {
           />
         )}
       </div> */}
-      <div className="bottom-image"></div>
     </div >
   );
 }
