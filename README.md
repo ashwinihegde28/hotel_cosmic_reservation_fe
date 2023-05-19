@@ -66,6 +66,16 @@ Run `npm install axios` command to install axios
 
 Run `npm install react-calendar` command to get the package
 
+## install stripe
+
+Run on the front end `npm install --save @stripe/react-stripe-js @stripe/stripe-js`
+
+Run on the back end `npm install stripe --save`
+
+## install pg native
+
+Run on the back end `npm install pg-native`
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
