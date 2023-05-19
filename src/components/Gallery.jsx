@@ -8,7 +8,18 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import { useNasa } from "../hooks/nasaHook";
+import Space1 from "./images/space1.jpg";
+import Space2 from "./images/space2.jpg";
+import Space3 from "./images/space3.jpg";
+import Space4 from "./images/space4.jpg";
+import Space5 from "./images/space5.jpg";
+
+
+
 export default function Services() {
+  const nasaData = useNasa();
+
 
   return (
 
@@ -19,58 +30,54 @@ export default function Services() {
           <Carousel.Item interval={2500}>
             <img
               className="d-block w-100"
-              src="https://images.unsplash.com/photo-1644601664278-28918473d56f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1373&q=80"
+              src={Space2}
               alt="First slide"
             />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <p>NASA Hubble Space Telescope captures the chaotic activity atop a three-light-year-tall pillar of gas and dust that is being eaten away by the brilliant light from nearby bright stars in a tempestuous stellar nursery called the Carina Nebula.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={2500}>
             <img
               className="d-block w-100"
-              src="https://images.unsplash.com/photo-1568473648251-3a0c3aa56192?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1489&q=80"
+              src={Space3}
               alt="Second slide"
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>In celebration of the International Year of Astronomy 2009, NASA's Great Observatories -- Hubble Space Telescope, Spitzer Space Telescope, and Chandra X-ray Observatory -- have produced a matched trio of images of the central region of our Milky Way.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={2500}>
             <img
               className="d-block w-100"
-              src="https://img.freepik.com/free-photo/sunset-sky-with-rocket-launcher-generated-by-ai_188544-24579.jpg?w=1480&t=st=1684013783~exp=1684014383~hmac=4a59bd74dd5b22f2664a6a39197809a012b676fae3ee4242017decbdb17d530c"
+              src={Space1}
               alt="Second slide"
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3></h3>
+              <p>A beautiful sun rising on earth from the ISS</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={2500}>
             <img
               className="d-block w-100"
-              src="https://cdn.pixabay.com/photo/2023/05/08/11/47/space-7978460_1280.jpg
-              "
+              src={Space4}
               alt="Second slide"
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>2007-02-12 DO WE KEEP TITLE? DATE OR SOMETHING?</h3>
+              <p>This infrared image from NASA Spitzer Space Telescope shows the Helix nebula, a cosmic starlet often photographed by amateur astronomers for its vivid colors and eerie resemblance to a giant eye.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://images.unsplash.com/photo-1617800032175-23631cb240f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
+              src={Space5}
               alt="Third slide"
             />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
               <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              This dazzling infrared image from NASA Spitzer Space Telescope shows hundreds of thousands of stars crowded into the swirling core of our spiral Milky Way galaxy.
               </p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -78,8 +85,8 @@ export default function Services() {
         </Carousel>
 
       </div>
-
-      <div className="cards">
+      {/* Below is the cards that were just an example line 89-110 */}
+      {/* <div className="cards">
         <Card style={{ width: '38rem' }}>
           <Card.Img variant="top" src="https://img.freepik.com/free-vector/astronaut-making-selfie-moon_1441-3247.jpg?w=900&t=st=1684014557~exp=1684015157~hmac=62f870c6352992be49ae95519afe618c97bc057e31757ed2574835d2023eb566" />
           <Card.Body>
@@ -100,10 +107,25 @@ export default function Services() {
             <Button variant="primary">More information</Button>
           </Card.Body>
         </Card>
-      </div>
+      </div> */}
       <div className="nasa-box">
         <div className="nasa-image">
-          <iframe src='https://mars.nasa.gov/layout/embed/image/insightweather/' width='1200' height='618' scrolling='no' frameborder='0' ></iframe>
+          <iframe src='https://mars.nasa.gov/layout/embed/image/mslweather/' width='1200' height='620' scrolling='no' frameborder='0'></iframe>
+        </div>
+      </div>
+      <div className="api-container">
+        <div className="api-title">
+          {nasaData.title}
+        </div>
+        <div className="api-image-box">
+          <img className="api-image" src={nasaData.hdurl}></img>
+        </div>
+        <div className="api-description">
+          <div className="api-author">
+          {nasaData.copyright}
+          </div>
+          <br></br>
+          {nasaData.explanation}
         </div>
       </div>
     </div>
