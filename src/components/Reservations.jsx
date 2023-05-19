@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import InvoicePopup from "./Invoice";
 
+import Accordion from 'react-bootstrap/Accordion';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -265,7 +266,7 @@ export default function Reservations(props) {
       <article className="top-image">
         <h1 className="title">Reservations</h1>
       </article>
-      
+
       {/* <div className="search-img">
         <Card style={{ width: "60rem" }}>
           <Card.Img
@@ -382,33 +383,39 @@ export default function Reservations(props) {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-              <div className="calender">
-                <h1 className="text-center">
-                  Choose your arrival and departure date
-                </h1>
-                <div className="calendar-container">
-                  <Calendar
-                    onChange={setDate}
-                    value={date}
-                    selectRange={true}
-                    minDate={new Date(2023, 5, 16)}
-                  />
-                </div>
-                {date.length > 0 ? (
-                  <p className="text-center">
-                    <span className="bold">Start:</span>{" "}
-                    {date[0].toDateString()}
-                    &nbsp;|&nbsp;
-                    <span className="bold">End:</span> {date[1].toDateString()}
-                  </p>
-                ) : (
-                  <p className="text-center">
-                    <span className="bold">Default selected date:</span>{" "}
-                    {date.toDateString()}
-                  </p>
-                )}
-              </div>
-
+              <Accordion>
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Calender</Accordion.Header>
+                  <Accordion.Body>
+                    <div className="calender">
+                      <h1 className="text-center">
+                        Choose your arrival and departure date
+                      </h1>
+                      <div className="calendar-container">
+                        <Calendar
+                          onChange={setDate}
+                          value={date}
+                          selectRange={true}
+                          minDate={new Date(2023, 5, 16)}
+                        />
+                      </div>
+                      {date.length > 0 ? (
+                        <p className="text-center">
+                          <span className="bold">Start:</span>{" "}
+                          {date[0].toDateString()}
+                          &nbsp;|&nbsp;
+                          <span className="bold">End:</span> {date[1].toDateString()}
+                        </p>
+                      ) : (
+                        <p className="text-center">
+                          <span className="bold">Default selected date:</span>{" "}
+                          {date.toDateString()}
+                        </p>
+                      )}
+                    </div>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
               {/* <fieldset>
                 <Form.Group as={Col} className="mb-3">
                   <Form.Label as="legend" column xs="auto">
