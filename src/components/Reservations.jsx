@@ -65,16 +65,20 @@ export default function Reservations(props) {
   const { addInvoice } = useInvoices();
   const { rooms, loading, getRoomById } = useRooms();
 
+  
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-  const handleSubmit = async () => {
-    // if successful payment
+  // added an object here
+  //  line 263 name, email, room, card: paymentMethod.id, paymentMethod 
+  const handleSubmit = async (object) => {
+    
     const card = elements.getElement(CardElement);
     const amount = 5000;
     const currency = "CAD";
-    const paymentMethod = "card";
+    const paymentMethod = object.paymentMethod;
 
     await customerPayment({ amount, currency, paymentMethod })
+
       .then((clientSecret) => {
         // Use the clientSecret for the client-side payment flow
 
@@ -254,7 +258,7 @@ export default function Reservations(props) {
     }
 
     if (!errorExists) {
-      handleSubmit({ name, email, room, card: paymentMethod.id });
+      handleSubmit({ name, email, room, card: paymentMethod.id, paymentMethod });
     }
   }
 
