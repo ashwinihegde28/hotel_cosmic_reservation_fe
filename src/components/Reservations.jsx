@@ -257,37 +257,26 @@ export default function Reservations(props) {
       console.log("[PaymentMethod]", paymentMethod);
     }
 
-    // if fetch email and check if already exist
+   //console.log(`email reservationbs`, email)
+    // getCustomerByEmail(email)
+    //   .then((data) => {
+    //     console.log(`data2`, data)
+    //     if (data.length === 1) {
+    //       errorExists = true;
+    //       alert(`Email already taken`)
+    //     } else {
 
-
-    // .then((data) => {
-    //   console.log(`data2`, data)
-
-    //   if (data === 1) {
-    //     errorExists = true;
-    //   }
-    //   console.log(`success`)
-    // })
-
-
-    console.log(`email reservationbs`, email)
-    getCustomerByEmail(email)
-      .then((data) => {
-        console.log(`data2`, data)
-        if (data === 1) {
-          errorExists = true;
-        } else {
-          if (!errorExists) {
-            handleSubmit({ name, email, room, card: paymentMethod.id, paymentMethod });
-            
-          }
-
-        }
-      })
-      .catch((error) => {
-        console.error("getCustomerByEmail failed:", error);
-      })
-
+          
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("getCustomerByEmail failed:", error);
+    //   })
+      
+      if (!errorExists) {
+        handleSubmit({ name, email, room, card: paymentMethod.id, paymentMethod });
+        
+      }
 
 
 

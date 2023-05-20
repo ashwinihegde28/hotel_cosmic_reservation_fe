@@ -46,9 +46,10 @@ export function useCustomers() {
       
     })
       .then(({ data }) => {
-        
+        console.log(`data in hook`, data)
         if (data === false) {
-          return 1
+          let data = 1
+          return data
         }
         return data
       
