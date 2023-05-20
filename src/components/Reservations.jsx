@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import InvoicePopup from "./Invoice";
 
-import Accordion from 'react-bootstrap/Accordion';
+import Accordion from "react-bootstrap/Accordion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import "./styles/navbar-styles.css";
 import "./styles/reservations-styles.css";
-import './styles/calender.css';
+import "./styles/calender.css";
 
-
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import InputGroup from "react-bootstrap/InputGroup";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import customerPayment from "../hooks/stripe_payment";
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 
 import { useReservations } from "../hooks/reservationHook";
 import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
+import { useRooms } from "../hooks/roomsHook";
 
 import { useNavigate } from "react-router-dom";
 
@@ -63,6 +63,7 @@ export default function Reservations(props) {
   const { addReservation, getReservationById } = useReservations();
   const { addCustomer } = useCustomers();
   const { addInvoice } = useInvoices();
+  const { rooms, loading, getRoomById } = useRooms();
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -73,65 +74,61 @@ export default function Reservations(props) {
     const currency = "CAD";
     const paymentMethod = "card";
 
-
     await customerPayment({ amount, currency, paymentMethod })
-      .then(clientSecret => {
+      .then((clientSecret) => {
         // Use the clientSecret for the client-side payment flow
 
         // Call the Stripe.js function to confirm the payment using the clientSecret
-        stripe.confirmCardPayment(clientSecret, {
-          payment_method: {
-            card: card
-          }
-        }).then(result => {
-          // Handle the payment result
-          if (result.error) {
-            console.error('Payment failed:', result.error.message);
-          } else if (result.paymentIntent.status === 'succeeded') {
-            //needs to be discussed
-            //console.log('Payment sucess')
-          }
-        }).catch(error => {
-          console.error('Error confirming payment:', error);
-        });
+        stripe
+          .confirmCardPayment(clientSecret, {
+            payment_method: {
+              card: card,
+            },
+          })
+          .then((result) => {
+            // Handle the payment result
+            if (result.error) {
+              console.error("Payment failed:", result.error.message);
+            } else if (result.paymentIntent.status === "succeeded") {
+              //needs to be discussed
+              //console.log('Payment sucess')
+            }
+          })
+          .catch((error) => {
+            console.error("Error confirming payment:", error);
+          });
       })
-      .catch(error => {
-        console.error('Payment intent creation failed:', error);
+      .catch((error) => {
+        console.error("Payment intent creation failed:", error);
       });
 
     // make the data an object ready for the hook
-    await addCustomer({ name, email })
+    await addCustomer({ name, email }).then((customer) => {
+      //We should have a calculation here Price per day * (checkOutDate - checkInDate)
+      const { totalPrice } = reservationData;
+      let customerId = customer.id;
 
-      .then((customer) => {
-        //We should have a calculation here Price per day * (checkOutDate - checkInDate)
-        const { totalPrice } = reservationData;
-        let customerId = customer.id;
+      addReservation({
+        checkInDate: date[0],
+        checkOutDate: date[1],
+        customerId,
+        roomId: room,
+        totalPrice,
+      }).then((reservations) => {
+        // must return reservations id
 
+        const description = `${name},${email},Moon Room`;
+        const reservations_id = reservations.id;
 
-        //const { totalPrice } = reservationData;
-
-        // const totalPrice = 80.0;
-        addReservation({
-          checkInDate: date[0],
-          checkOutDate: date[1],
-          customerId,
-          roomId: room,
-          totalPrice,
-        }).then((reservations) => {
-          // must return reservations id
-
-          const description = `${name},${email},Moon Room`;
-          const reservations_id = reservations.id;
-
-          addInvoice({ reservations_id, description }).then((newInvoice1) => {
-            // prepare data for Invoice Pop up and display
-            // set entire invoice object to the newInvoice state to use it later.
-            setNewInvoice(newInvoice1);
-            setShowInvoice(true);
-            alert("Reserviation booked!")
-          });
+        addInvoice({ reservations_id, description }).then((newInvoice1) => {
+          // prepare data for Invoice Pop up and display
+          // set entire invoice object to the newInvoice state to use it later.
+          setNewInvoice(newInvoice1);
+          setShowInvoice(true);
+          alert("Reserviation booked!");
         });
       });
+    });
   };
 
   // const handleReservationSubmit = () => {
@@ -144,9 +141,8 @@ export default function Reservations(props) {
   //       // We need to call a pop up here to display the data from reservation
 
   //       // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
-  //       //} =  reservation 
+  //       //} =  reservation
   //       alert(`Reservation is :`);
-
 
   //     });
 
@@ -375,9 +371,11 @@ export default function Reservations(props) {
                     isInvalid={!!error.room}
                   >
                     <option>Select a room</option>
-                    <option value="1">Moon theme room</option>
-                    <option value="2">Venus Theme room</option>
-                    <option value="3">Jupiter Theme room</option>
+                    {rooms.map((room) => (
+                      <option key={room.id} value={room.id}>
+                        {room.type}
+                      </option>
+                    ))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid" tooltip>
                     {error.room}
@@ -405,7 +403,8 @@ export default function Reservations(props) {
                           <span className="bold">Start:</span>{" "}
                           {date[0].toDateString()}
                           &nbsp;|&nbsp;
-                          <span className="bold">End:</span> {date[1].toDateString()}
+                          <span className="bold">End:</span>{" "}
+                          {date[1].toDateString()}
                         </p>
                       ) : (
                         <p className="text-center">
@@ -467,27 +466,26 @@ export default function Reservations(props) {
                     {error.card}
                   </Form.Control.Feedback>
                 </InputGroup> */}
-                {error.card && (<div>{error.card}</div>)}
+                {error.card && <div>{error.card}</div>}
               </Form.Group>
-
 
               <Form.Group as={Col} className="mb-3">
                 <Col xs="auto">
                   <Button size="lg" type="submit" text="Book now!" />
                 </Col>
               </Form.Group>
-            </Form >
-          </Card >
-        </div >
-      </div >
-      {/* <div>
+            </Form>
+          </Card>
+        </div>
+      </div>
+      <div>
         {showInvoice && (
           <InvoicePopup
             invoiceData={newInvoice}
             setShowInvoice={setShowInvoice}
           />
         )}
-      </div> */}
-    </div >
+      </div>
+    </div>
   );
 }
