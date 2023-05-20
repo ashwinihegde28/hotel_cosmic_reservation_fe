@@ -21,7 +21,9 @@ export default function InvoicePopup({ invoiceData, setShowInvoice }) {
         <h5>Invoice Details</h5>
         <p>Name of Customer: {descriptionValues[0]}</p>
         <p>Email ID: {descriptionValues[1]}</p>
-        <p>Room Type: {descriptionValues[2]}</p>
+        <p>Room Number: {descriptionValues[2]}</p>
+        <p>Total Amount: {descriptionValues[3]} Digital currencies</p>
+
         {/* <p>Room Type: {descriptionValues[3]}</p> */}
       </div>
       <div className="invoice-options">
