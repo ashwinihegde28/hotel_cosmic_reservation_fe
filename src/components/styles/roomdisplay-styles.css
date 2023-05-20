@@ -1,8 +1,19 @@
-.button-container {
-  display: flex;
+.room-body {
+  overflow-y: visible;
+  background-color: #050336 /* Add overflow-y property to enable vertical scrolling if necessary */
 }
 
-.room-body {
-  background-color: #050336; 
+.room-body .cards {
+  padding: 30px;
+  display: flex;
+  justify-content: space-evenly;
 }
+
+.room-body .button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px; /* Adjust the margin-top value as needed */
+}
+
+
 
