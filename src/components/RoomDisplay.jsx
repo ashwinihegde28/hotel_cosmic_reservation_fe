@@ -4,9 +4,6 @@ import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 
-
-
-
 import RoomCards from './RoomCards';
 
 import "./styles/roomdisplay-styles.css";
@@ -20,7 +17,7 @@ import bedroomJupiterImage from "./images/bedroom-jupiter.jpg";
 export default function RoomDisplay2() {
   return (
     
-    <p className="room-body">
+    <div className="room-body">
       <i class="fa-solid fa-bed" style={{color: 'black'}}></i>
       <Container>
         <Col>
@@ -48,12 +45,12 @@ export default function RoomDisplay2() {
           <Row>
             <div className="button-container justify-content-end">
               <Link to="/reservations">
-                <Button className="room-button" text="Book Room" />
+                <Button variant="primary" className="room-button" text="Book Room" />
               </Link>
             </div>
           </Row>
         </Col>
       </Container>
-    </p>
+    </div>
   );
 }

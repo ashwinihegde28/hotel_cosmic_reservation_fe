@@ -5,26 +5,47 @@
 
 }
 
+.theme-description {
+  background-color: #050336;
+  /* Replace with your desired background color */
+  padding: 20px;
+  color: white;
+  /* Set the text color to white */
+}
 
+.theme-description h2 {
+  color: white;
+  /* Set the color of the <h2> element to white */
+}
+
+.theme-description p {
+  color: white;
+  /* Set the color of the <p> element to white */
+}
+
+.theme-description svg {
+  fill: white;
+  /* Set the fill color of the SVG icons to white */
+}
 
 .d-block {
-height: 650px;
+  height: 650px;
 
 }
 
 .bed-icon {
-  height: 80px;
-  width: 80px;
-  margin-right: 40px;
-  margin-left: 40px;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
 
 }
 
 .bath-icon {
-  height: 80px;
-  width: 80px;
-  margin-right: 40px;
-  margin-left: 40px;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .icons-container {
@@ -33,25 +54,22 @@ height: 650px;
   padding-right: 40px;
   padding-right: 40px;
   padding-bottom: 20px;
-  
+
 }
 
 .h4-icon {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .li icons-container:hover {
   color: blue;
 }
 
-.bed:hover {
+.theme-description svg:hover {
   color: blue;
 }
 
-.bath:hover {
-  color: blue;
+.bed:hover svg,
+.bath:hover svg {
+  fill: blue;
 }
-
-/* .li icons-container:hover {
-  color: blue;
-} */
