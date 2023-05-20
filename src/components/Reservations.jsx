@@ -52,7 +52,7 @@ export default function Reservations(props) {
     checkOutDate: "",
     customerId: "",
     roomId: "",
-    totalPrice: 0,
+    totalPrice: 800,
   });
 
   const stripe = useStripe();
@@ -65,20 +65,17 @@ export default function Reservations(props) {
   const { addInvoice } = useInvoices();
   const { rooms, loading, getRoomById } = useRooms();
 
-
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   // added an object here
-  //  line 263 name, email, room, card: paymentMethod.id, paymentMethod 
+  //  line 263 name, email, room, card: paymentMethod.id, paymentMethod
   const handleSubmit = async (object) => {
-
     const card = elements.getElement(CardElement);
     const amount = 5000;
     const currency = "CAD";
     const paymentMethod = object.paymentMethod;
 
     await customerPayment({ amount, currency, paymentMethod })
-
       .then((clientSecret) => {
         // Use the clientSecret for the client-side payment flow
 
@@ -95,7 +92,7 @@ export default function Reservations(props) {
               console.error("Payment failed:", result.error.message);
             } else if (result.paymentIntent.status === "succeeded") {
               //needs to be discussed
-              console.log('Payment sucess')
+              console.log("Payment sucess");
             }
           })
           .catch((error) => {
@@ -121,7 +118,7 @@ export default function Reservations(props) {
       }).then((reservations) => {
         // must return reservations id
 
-        const description = `${name},${email},Moon Room`;
+        const description = `${name},${email},${room},${totalPrice}`;
         const reservations_id = reservations.id;
 
         addInvoice({ reservations_id, description }).then((newInvoice1) => {
@@ -216,7 +213,7 @@ export default function Reservations(props) {
       });
     }
 
-    if (room === "" || room === '0') {
+    if (room === "" || room === "0") {
       errorExists = true;
       setError((prevError) => {
         return {
@@ -257,29 +254,38 @@ export default function Reservations(props) {
       console.log("[PaymentMethod]", paymentMethod);
     }
 
-   //console.log(`email reservationbs`, email)
-    // getCustomerByEmail(email)
-    //   .then((data) => {
-    //     console.log(`data2`, data)
-    //     if (data.length === 1) {
-    //       errorExists = true;
-    //       alert(`Email already taken`)
-    //     } else {
+    // if fetch email and check if already exist
 
-          
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("getCustomerByEmail failed:", error);
-    //   })
-      
-      if (!errorExists) {
-        handleSubmit({ name, email, room, card: paymentMethod.id, paymentMethod });
-        
-      }
+    // .then((data) => {
+    //   console.log(`data2`, data)
 
+    //   if (data === 1) {
+    //     errorExists = true;
+    //   }
+    //   console.log(`success`)
+    // })
 
-
+    console.log(`email reservationbs`, email);
+    getCustomerByEmail(email)
+      .then((data) => {
+        console.log(`data2`, data);
+        if (data === 1) {
+          errorExists = true;
+        } else {
+          if (!errorExists) {
+            handleSubmit({
+              name,
+              email,
+              room,
+              card: paymentMethod.id,
+              paymentMethod,
+            });
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("getCustomerByEmail failed:", error);
+      });
   }
 
   return (
@@ -394,7 +400,7 @@ export default function Reservations(props) {
                     value={room}
                     isInvalid={!!error.room}
                   >
-                    <option value='0'>Select a room</option>
+                    <option value="0">Select a room</option>
                     {rooms.map((room) => (
                       <option key={room.id} value={room.id}>
                         {room.type}
