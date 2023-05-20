@@ -16,15 +16,6 @@
   padding-top: 100px;
 }
 
-.bottom-image {
-  background-image: url("../images/lounge2.jpg");
-  height: 750px;
-  box-sizing: border-box;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment:  fixed;
-  background-position: bottom;
-}
 
 .search-btn {
   display: flex;
@@ -57,8 +48,16 @@
   text-align: center;
 }
 
+.form-search {
+  padding-top: 50px;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  
+}
 .form {
-  margin-top: 100px;
+  
   font-size: larger;
   display: flex;
   justify-content: center;
@@ -76,4 +75,13 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
+.active-icon {
+  padding-right: 30px;
+}
+
+.text-center {
+  font-size: 30px;
+}
+
 
