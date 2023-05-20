@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../components/Button";
 
 import "./styles/invoice-popup-style.css";
@@ -28,7 +29,9 @@ export default function InvoicePopup({ invoiceData, setShowInvoice }) {
         {/* <p>Room Type: {descriptionValues[3]}</p> */}
       </div>
       <div className="invoice-options">
-        <Button text="Close" onClick={() => setShowInvoice(false)} />
+        <Link to="/">
+          <Button text="Close" onClick={() => setShowInvoice(false)} />
+        </Link>
         <Button text="Print" onClick={handlePrint} disabled />
         <Button text="Email" onClick={handleEmail} disabled />
       </div>
