@@ -382,6 +382,14 @@ export default function Reservations(props) {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
+              <div>
+                {showInvoice && (
+                  <InvoicePopup
+                    invoiceData={newInvoice}
+                    setShowInvoice={setShowInvoice}
+                  />
+                )}
+              </div>
               <Accordion>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Calender</Accordion.Header>
@@ -477,14 +485,6 @@ export default function Reservations(props) {
             </Form>
           </Card>
         </div>
-      </div>
-      <div>
-        {showInvoice && (
-          <InvoicePopup
-            invoiceData={newInvoice}
-            setShowInvoice={setShowInvoice}
-          />
-        )}
       </div>
     </div>
   );
