@@ -4,3 +4,21 @@
   justify-content:space-evenly;
 
 }
+
+.theme-description {
+  background-color: #050336; /* Replace with your desired background color */
+  padding: 20px;
+  color: white; /* Set the text color to white */
+}
+
+.theme-description h2 {
+  color: white; /* Set the color of the <h2> element to white */
+}
+
+.theme-description p {
+  color: white; /* Set the color of the <p> element to white */
+}
+
+.theme-description svg {
+  fill: white; /* Set the fill color of the SVG icons to white */
+}

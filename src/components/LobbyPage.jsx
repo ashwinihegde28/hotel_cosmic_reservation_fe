@@ -13,7 +13,7 @@ import spaImage from "./images/spa.jpg";
 
 export default function LobbyPage() {
   return (
-    <p className="lobby-body">
+    <div className="lobby-body">
     <Container>
       <Row>
         <Col className="mb-4">
@@ -56,6 +56,6 @@ export default function LobbyPage() {
         </Col>
       </Row>
     </Container>
-    </p>
+    </div>
   );
 }

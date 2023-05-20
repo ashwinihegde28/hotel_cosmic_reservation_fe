@@ -12,7 +12,6 @@ export default function VenusThemeRoom() {
 
     <div className="page-container">
       <div className="container-half">
-        <div> Venus Theme Room !</div>
         <Carousel>
           <Carousel.Item interval={2500}>
             <img

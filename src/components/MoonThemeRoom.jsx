@@ -12,7 +12,7 @@ export default function MoonThemeRoom() {
 
     <div className="page-container">
       <div className="container-half">
-        <div> Moon Theme Room !</div>
+        {/* <div> Moon Theme Room !</div> */}
         <Carousel>
           <Carousel.Item interval={2500}>
             <img
