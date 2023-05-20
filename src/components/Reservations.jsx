@@ -61,17 +61,17 @@ export default function Reservations(props) {
   const [date, setDate] = useState(new Date());
 
   const { addReservation, getReservationById } = useReservations();
-  const { addCustomer } = useCustomers();
+  const { addCustomer, getCustomerByEmail } = useCustomers();
   const { addInvoice } = useInvoices();
   const { rooms, loading, getRoomById } = useRooms();
 
-  
+
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   // added an object here
   //  line 263 name, email, room, card: paymentMethod.id, paymentMethod 
   const handleSubmit = async (object) => {
-    
+
     const card = elements.getElement(CardElement);
     const amount = 5000;
     const currency = "CAD";
@@ -95,7 +95,7 @@ export default function Reservations(props) {
               console.error("Payment failed:", result.error.message);
             } else if (result.paymentIntent.status === "succeeded") {
               //needs to be discussed
-              //console.log('Payment sucess')
+              console.log('Payment sucess')
             }
           })
           .catch((error) => {
@@ -216,7 +216,7 @@ export default function Reservations(props) {
       });
     }
 
-    if (room === "") {
+    if (room === "" || room === '0') {
       errorExists = true;
       setError((prevError) => {
         return {
@@ -257,9 +257,40 @@ export default function Reservations(props) {
       console.log("[PaymentMethod]", paymentMethod);
     }
 
-    if (!errorExists) {
-      handleSubmit({ name, email, room, card: paymentMethod.id, paymentMethod });
-    }
+    // if fetch email and check if already exist
+
+
+    // .then((data) => {
+    //   console.log(`data2`, data)
+
+    //   if (data === 1) {
+    //     errorExists = true;
+    //   }
+    //   console.log(`success`)
+    // })
+
+
+    console.log(`email reservationbs`, email)
+    getCustomerByEmail(email)
+      .then((data) => {
+        console.log(`data2`, data)
+        if (data === 1) {
+          errorExists = true;
+        } else {
+          if (!errorExists) {
+            handleSubmit({ name, email, room, card: paymentMethod.id, paymentMethod });
+            
+          }
+
+        }
+      })
+      .catch((error) => {
+        console.error("getCustomerByEmail failed:", error);
+      })
+
+
+
+
   }
 
   return (
@@ -374,7 +405,7 @@ export default function Reservations(props) {
                     value={room}
                     isInvalid={!!error.room}
                   >
-                    <option>Select a room</option>
+                    <option value='0'>Select a room</option>
                     {rooms.map((room) => (
                       <option key={room.id} value={room.id}>
                         {room.type}

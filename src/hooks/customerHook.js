@@ -38,6 +38,29 @@ export function useCustomers() {
       .catch((err) => console.log(err));
   };
 
+  const getCustomerByEmail = (customer_email) => {
+    
+      return axios({
+      method: "GET",
+      url: `/api/customers/email`,
+      
+    })
+      .then(({ data }) => {
+        
+        if (data === false) {
+          return 1
+        }
+        return data
+      
+        // dispatch({
+        //   type: "GET_CUSTOMERS",
+        //   payload: [data],
+        // });
+      })
+      .catch((err) => console.log(err));
+  };
+
+
   const addCustomer = (customer) => {
     // Adding a new customer
     return axios({
@@ -55,7 +78,7 @@ export function useCustomers() {
       .catch((err) => console.log(`error catch`, err));
   };
 
-  return { ...state, addCustomer, getCustomer };
+  return { ...state, addCustomer, getCustomer, getCustomerByEmail };
 }
 
 export function customersReducer(state, action) {

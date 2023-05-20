@@ -5,14 +5,21 @@ import { Link } from "react-router-dom";
 import "./styles/moon_theme_room-styles.css";
 
 import Carousel from 'react-bootstrap/Carousel';
+import { useRooms } from "../hooks/roomsHook";
+
+
 
 export default function MoonThemeRoom() {
+  
+  const { getRoomById } = useRooms();
+  
 
   return (
 
+
     <div className="page-container">
       <div className="container-half">
-        <div> Moon Theme Room !</div>
+        
         <Carousel>
           <Carousel.Item interval={2500}>
             <img
