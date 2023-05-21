@@ -11,7 +11,7 @@ export default async function customerPayment(paymentdetails) {
     data: paymentdetails,
   })
     .then(({ data }) => {
-      //console.log(`inside hook`)
+
       return data
     })
     .catch((err) => console.log(`error catch`, err));

@@ -1,5 +1,4 @@
 
-
 export const scrollToTop = () =>{
   console.log(`scrolling up`)
   window.scrollTo({

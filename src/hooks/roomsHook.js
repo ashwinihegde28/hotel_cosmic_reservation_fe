@@ -29,7 +29,7 @@ export function useRooms() {
           type: "SET_ROOM",
           payload: data,
         });
-        //console.log(`getRoomById data`, data)
+
         return data
       })
       .catch((err) => console.log(err));

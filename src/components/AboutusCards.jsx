@@ -1,9 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
-// import Button from 'react-bootstrap/Button';
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
-
 
 
 export default function AboutusCards(props) {

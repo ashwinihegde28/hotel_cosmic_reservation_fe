@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 import "./styles/services-styles.css";
 
@@ -10,8 +8,33 @@ import Bar3 from "./images/bar3.png";
 import Bar4 from "./images/bar4.png";
 
 import Carousel from 'react-bootstrap/Carousel';
+import { useServices } from "../hooks/servicesHook"; 
 
 export default function Bar() {
+
+  const { getService } = useServices();
+
+  const [services, setServices] = useState({
+    name: "",
+    description: "",
+  })
+  const id = '3';
+
+  const loadPage = async () => {
+    getService(id)
+
+      .then((servicesDetails) => {
+        
+        setServices({
+          name: servicesDetails.name,
+          description: servicesDetails.description,
+        })
+        
+      })
+  }
+  useEffect(() => {
+    loadPage()
+    }, [])
 
   return (
 
@@ -72,20 +95,8 @@ export default function Bar() {
         </Carousel>
       </div>
       <div className="container-half-lower">
-        <p>
-          <h2>A fine selection of high end bars</h2>
-          Theme Lorem ipsum dolor sit amet. Ex delectus incidunt sed dolor numquam qui voluptas voluptatem est blanditiis repudiandae eum saepe accusamus et tempora nobis.
-          33 tempore accusantium ut rerum earum qui dolorum quibusdam sit magni voluptates qui ducimus deleniti vel cumque magnam ad quas rerum.
-          Qui inventore inventore sit reprehenderit veniam et galisum iure qui repellendus voluptatibus a adipisci consequatur qui incidunt delectus.
-          Eum omnis aliquam et omnis delectus eum reprehenderit voluptas et eaque nulla ut repellendus quisquam. Aut saepe consectetur non atque maiores et aliquid voluptate.
-          Ut porro recusandae At neque voluptates aut quia dolorem non consectetur excepturi et autem nulla.
-          Eos quisquam minima ea dolores vitae et necessitatibus corporis 33 earum omnis! Ut doloremque quos et dolorem accusantium non doloremque dolor sit sint ipsum.
-          At quos architecto rem expedita harum in minima quisquam qui dolores facilis. Et aliquam dicta id internos sint est sunt ipsam ad corporis accusamus ut facere iusto.</p>
-      </div>
-      <div className="button-container">
-        <Link to="/Reservations">
-          <button className="room-button">Book Room</button>
-        </Link>
+          <h2 className="services-title">{services.name}</h2>
+        <p className="description">{services.description}</p>
       </div>
       
     </div>

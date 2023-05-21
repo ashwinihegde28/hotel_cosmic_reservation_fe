@@ -131,7 +131,12 @@ export default function Navbar() {
             </li>
           </>
         )}
-        {location.pathname === "/services" && (
+        {(location.pathname === "/services" ||
+         location.pathname === "/spa" ||
+          location.pathname === "/restaurant" ||
+           location.pathname === "/bar" ||
+            location.pathname === "/casino" ||
+             location.pathname === "/sportsbar") && (
           <>
             <li className="active">
               <a href="/roomdisplay" className="nav-link">
@@ -162,7 +167,7 @@ export default function Navbar() {
         {(location.pathname === "/aboutus" ||
           location.pathname === "/moonthemeroom" ||
           location.pathname === "/jupiterthemeroom" ||
-          location.pathname === "/jupiterthemeroom" ||
+          location.pathname === "/venusthemeroom" ||
           location.pathname === "/reservations/search") && (
           <>
             <li className="active">

@@ -6,15 +6,11 @@ import "./styles/services-styles.css"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import { Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
+
 import Button from "../components/Button";
-
 import RoomCards from './RoomCards';
-
-import bedroomMoonImage from "./images/bedroom-moon.jpg";
-import bedroomVenusImage from "./images/bedroom-venus.jpg";
-import bedroomJupiterImage from "./images/bedroom-jupiter.jpg";
 import Spa from "./images/spa.jpg";
 import Casino from "./images/casino2.png";
 import Bar from "./images/bar.png";
@@ -26,7 +22,7 @@ export default function Services() {
 
   return (
     
-    <p className="services-body">
+    <div className="services-body">
     <i className="fa-solid fa-bed" style={{color: 'black'}}></i>
     <Container>
       <Col>
@@ -75,6 +71,6 @@ export default function Services() {
 
       </Col>
     </Container>
-  </p>
+  </div>
   )
 };

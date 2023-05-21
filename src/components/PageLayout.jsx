@@ -6,8 +6,6 @@ import Navbar from "./Navbar";
 import Footer from "./NewFooter";
 
 
-
-
 export default function PageLayout() {
   return (
     <>

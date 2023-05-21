@@ -46,17 +46,13 @@ export function useCustomers() {
       
     })
       .then(({ data }) => {
-        console.log(`data in hook`, data)
+
         if (data === false) {
           let data = 1
           return data
         }
         return data
       
-        // dispatch({
-        //   type: "GET_CUSTOMERS",
-        //   payload: [data],
-        // });
       })
       .catch((err) => console.log(err));
   };

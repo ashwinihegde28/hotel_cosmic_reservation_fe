@@ -8,7 +8,6 @@ export function useNasa() {
   const [nasaData, setNasaData] = useState({});
   
   const nasaApi = () => {
-    // Adding a new invoice
 
     return axios({
       method: "GET",
@@ -16,7 +15,6 @@ export function useNasa() {
     })
       .then(({ data }) => {
 
-        console.log(`data`, data.hdurl)
         setNasaData(data)
         
       })

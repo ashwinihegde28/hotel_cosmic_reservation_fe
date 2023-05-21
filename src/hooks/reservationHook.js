@@ -23,7 +23,7 @@ export function useReservations() {
   }, []);
 
   const addReservation = (reservation) => {
-    // Adding a new reservation
+
     return axios({
       method: "POST",
       url: "/api/reservations",
@@ -34,8 +34,7 @@ export function useReservations() {
           type: "ADD_RESERVATION",
           payload: data,
         });
-        //console.log(`success add reservation`)
-        //console.log(`data,`, data)
+
         return data
       })
       .catch((err) => console.log(err));

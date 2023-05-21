@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
-
 import "./styles/services-styles.css";
 
 import Spa from "./images/spa.jpg";
@@ -13,7 +11,6 @@ import { useServices } from "../hooks/servicesHook";
 
 export default function SpaPage() {
 
-  
   const { getService } = useServices();
 
   const [services, setServices] = useState({
@@ -26,14 +23,12 @@ export default function SpaPage() {
     getService(id)
 
       .then((servicesDetails) => {
-        console.log(`servicesDetails`, servicesDetails)
-        
+
         setServices({
           name: servicesDetails.name,
           description: servicesDetails.description,
         })
         
-
       })
   }
   useEffect(() => {
@@ -100,13 +95,8 @@ export default function SpaPage() {
       </div>
       
       <div className="container-half-lower">
-          <h2>{services.name}</h2>
+          <h2 className="services-title">{services.name}</h2>
         <p className="description">{services.description}</p>
-      </div>
-      <div className="button-container">
-        <Link to="/Reservations">
-          <button className="room-button">Book Room</button>
-        </Link>
       </div>
       
     </div>

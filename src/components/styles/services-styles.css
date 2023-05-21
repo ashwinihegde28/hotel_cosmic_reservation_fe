@@ -13,3 +13,8 @@
   padding-left: 3rem;
   
 }
+
+.services-title:hover {
+  color:blue;
+}
+

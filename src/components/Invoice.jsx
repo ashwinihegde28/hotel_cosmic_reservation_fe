@@ -13,7 +13,6 @@ export default function InvoicePopup({ invoiceData, setShowInvoice }) {
     // Stretch : Logic to handle emailing the invoice
   };
   const descriptionValues = invoiceData.description.split(",");
-  console.log(`descriptionValues`, descriptionValues);
 
   return (
     <div className="invoice-popup">

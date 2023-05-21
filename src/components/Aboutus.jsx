@@ -18,7 +18,7 @@ export default function Aboutus() {
         <h1 className="title-aboutus">About us</h1>
       </article>
       <div>
-        <p className="lobby-body">
+        <div className="lobby-body">
           <Container>
             <Row>
               <Col className="mb-4">
@@ -56,7 +56,7 @@ export default function Aboutus() {
               </Col>
             </Row>
           </Container>
-        </p>
+        </div>
       </div>
     </div>
 

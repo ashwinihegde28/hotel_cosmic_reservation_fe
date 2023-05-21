@@ -1,37 +1,35 @@
 import React, { useState } from "react";
+
 import Button from "../components/Button";
 import InvoicePopup from "./Invoice";
 
-import Accordion from "react-bootstrap/Accordion";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
 import "./styles/navbar-styles.css";
 import "./styles/reservations-styles.css";
 import "./styles/calender.css";
 
+import Accordion from "react-bootstrap/Accordion";
+import Calendar from "react-calendar";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
+
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import customerPayment from "../hooks/stripe_payment";
 import { loadStripe } from "@stripe/stripe-js";
 
+import customerPayment from "../hooks/stripe_payment";
 import { useReservations } from "../hooks/reservationHook";
 import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
 import { useRooms } from "../hooks/roomsHook";
 
-import { useNavigate } from "react-router-dom";
 
 export default function Reservations(props) {
   //const [reservationEmail, setReservationEmail] = useState("");
-  const [reservationID, setReservationID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
-  const navigate = useNavigate();
   const [showInvoice, setShowInvoice] = useState(false);
   const [newInvoice, setNewInvoice] = useState(null);
 
@@ -60,12 +58,12 @@ export default function Reservations(props) {
 
   const [date, setDate] = useState(new Date());
 
-  const { addReservation, getReservationById } = useReservations();
+  const { addReservation } = useReservations();
   const { addCustomer, getCustomerByEmail } = useCustomers();
   const { addInvoice } = useInvoices();
-  const { rooms, loading, getRoomById } = useRooms();
+  const { rooms } = useRooms();
 
-  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+  // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   // added an object here
   //  line 263 name, email, room, card: paymentMethod.id, paymentMethod
@@ -132,51 +130,6 @@ export default function Reservations(props) {
     });
   };
 
-  // const handleReservationSubmit = () => {
-  //   // reservationID, reservationEmail
-  //   getReservationById(reservationID)
-  //     .then((reservation) => {
-
-  //       // We need to call a pop up here to display the data from reservation
-
-  //       // We need to call a pop up here to display the data from reservation
-
-  //       // const { id, check_in_date, check_out_date, customer_id, date_reserved, room_id, total_price
-  //       //} =  reservation
-  //       alert(`Reservation is :`);
-
-  //     });
-
-  // };
-
-  // function validateReservation(event) {
-  //   event.preventDefault();
-
-  //   let errorExists = false;
-
-  //   if (reservationEmail === "") {
-  //     errorExists = true;
-  //     setReservationError((prevError) => {
-  //       return {
-  //         ...prevError,
-  //         reservationEmail: "Please enter email",
-  //       };
-  //     });
-  //   }
-
-  //   if (reservationID === "") {
-  //     errorExists = true;
-  //     setReservationError((prevError) => {
-  //       return {
-  //         ...prevError,
-  //         reservationID: "Please enter your reservation ID",
-  //       };
-  //     });
-  //   }
-  //   if (!errorExists) {
-  //     handleReservationSubmit();
-  //   }
-  // }
 
   async function validateBooking(event) {
     event.preventDefault();
@@ -251,24 +204,11 @@ export default function Reservations(props) {
       });
       return;
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      //console.log("[PaymentMethod]", paymentMethod);
     }
 
-    // if fetch email and check if already exist
-
-    // .then((data) => {
-    //   console.log(`data2`, data)
-
-    //   if (data === 1) {
-    //     errorExists = true;
-    //   }
-    //   console.log(`success`)
-    // })
-
-    console.log(`email reservationbs`, email);
     getCustomerByEmail(email)
       .then((data) => {
-        console.log(`data2`, data);
         if (data === 1) {
           errorExists = true;
         } else {
@@ -293,52 +233,6 @@ export default function Reservations(props) {
       <article className="top-image">
         <h1 className="title">Reservations</h1>
       </article>
-
-      {/* <div className="search-img">
-        <Card style={{ width: "60rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.optics-trade.eu/blog/wp-content/uploads/2020/12/Telescope-VS-Binoculars.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Looking for an existing reservation?</Card.Title>
-            <Form onSubmit={validateReservation}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <InputGroup hasValidation>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    onChange={(e) => setReservationEmail(e.target.value)}
-                    value={reservationEmail}
-                    isInvalid={!!reservationError.reservationEmail}
-                  />
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {reservationError.reservationEmail}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicReservationId">
-                <Form.Label>Reservation ID</Form.Label>
-                <InputGroup hasValidation>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter Reservation ID"
-                    onChange={(e) => setReservationID(e.target.value)}
-                    value={reservationID}
-                    isInvalid={!!reservationError.reservationID}
-                  />
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {reservationError.reservationID}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
-              <Button variant="primary" type="submit" text="Search" />
-            </Form>
-          </Card.Body>
-        </Card>
-      </div> */}
-
       <div className="form-background">
         <div className="form">
           <Card
