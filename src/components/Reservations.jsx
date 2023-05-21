@@ -24,7 +24,6 @@ import { useCustomers } from "../hooks/customerHook";
 import { useInvoices } from "../hooks/invoicesHook";
 import { useRooms } from "../hooks/roomsHook";
 
-
 export default function Reservations(props) {
   //const [reservationEmail, setReservationEmail] = useState("");
   const [name, setName] = useState("");
@@ -136,11 +135,11 @@ export default function Reservations(props) {
     });
   };
 
-
   async function validateBooking(event) {
     event.preventDefault();
 
     let errorExists = false;
+    setError("");
 
     if (name === "") {
       errorExists = true;
