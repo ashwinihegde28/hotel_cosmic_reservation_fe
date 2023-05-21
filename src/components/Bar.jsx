@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./styles/services-styles.css";
 
@@ -12,6 +12,11 @@ import Bar4 from "./images/bar4.png";
 import Carousel from 'react-bootstrap/Carousel';
 
 export default function Bar() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
 
   return (
 

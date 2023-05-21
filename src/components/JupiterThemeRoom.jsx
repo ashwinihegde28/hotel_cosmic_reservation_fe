@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./styles/jupiter_theme_room.css";
 
@@ -11,6 +11,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from "../components/Button";
 
 export default function JupiterThemeRoom() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
   
   return (
 

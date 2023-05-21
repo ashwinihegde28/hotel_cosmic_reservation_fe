@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 import "./styles/navbar-styles.css"
 import "./styles/gallery-styles.css"
@@ -19,6 +20,12 @@ import Space5 from "./images/space5.jpg";
 
 export default function Services() {
   const nasaData = useNasa();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
 
 
   return (

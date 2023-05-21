@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./styles/moon_theme_room-styles.css";
 
@@ -13,6 +13,12 @@ import Button from "../components/Button";
 export default function MoonThemeRoom() {
   
   const { getRoomById } = useRooms();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
   
 
   return (
