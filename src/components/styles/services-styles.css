@@ -1,3 +1,15 @@
 .services-body {
   background-color: #050336; 
 }
+
+.description {
+  font-size: x-large;
+}
+
+.container-half-lower {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-left: 3rem;
+  
+}

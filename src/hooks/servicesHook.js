@@ -25,7 +25,7 @@ export function useServices() {
   }, [state.loading]);
 
   const getService = (serviceId) => {
-    axios({
+    return axios({
       method: "GET",
       url: `/api/services/${serviceId}`,
     })
@@ -34,6 +34,7 @@ export function useServices() {
           type: "SET_SERVICES",
           payload: [data],
         });
+        return data
       })
       .catch((err) => console.log(err));
   };
