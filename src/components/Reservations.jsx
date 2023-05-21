@@ -25,17 +25,16 @@ import { useInvoices } from "../hooks/invoicesHook";
 import { useRooms } from "../hooks/roomsHook";
 
 export default function Reservations(props) {
-  //const [reservationEmail, setReservationEmail] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
   const [showInvoice, setShowInvoice] = useState(false);
   const [newInvoice, setNewInvoice] = useState(null);
 
-  // const [reservationError, setReservationError] = useState({
-  //   reservationEmail: "",
-  //   reservationID: "",
-  // });
+  const handleCalendarChange = (newDate) => {
+    setDate(newDate);
+  };
+
   const [error, setError] = useState({
     email: "",
     name: "",
@@ -346,23 +345,28 @@ export default function Reservations(props) {
                       </h1>
                       <div className="calendar-container">
                         <Calendar
-                          onChange={(newDate) => setDate(newDate)}
+                          onChange={handleCalendarChange}
                           value={date}
                           selectRange={true}
-                          minDate={new Date(2023, 5, 16)}
+                          minDate={new Date()}
                         />
                       </div>
                       {date[0] && date[1] ? (
-                        <p className="text-center">
-                          <span className="bold">Start:</span>{" "}
-                          {date[0].toDateString()} |{" "}
-                          <span className="bold">End:</span>{" "}
-                          {date[1].toDateString()}
-                        </p>
+                        date[0] <= date[1] ? (
+                          <p className="text-center">
+                            <span className="bold">Start:</span>{" "}
+                            {date[0].toDateString()} |{" "}
+                            <span className="bold">End:</span>{" "}
+                            {date[1].toDateString()}
+                          </p>
+                        ) : (
+                          <p className="text-center error-message">
+                            Please select a valid date range.
+                          </p>
+                        )
                       ) : (
                         <p className="text-center">
-                          <span className="bold">Default selected date:</span>{" "}
-                          {date[0].toDateString()}
+                          Please select your arrival and departure dates.
                         </p>
                       )}
                     </div>
