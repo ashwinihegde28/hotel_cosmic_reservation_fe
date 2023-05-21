@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { Link } from "react-router-dom";
+// import React from "react";
+
+import { Link, useLocation } from "react-router-dom";
 
 import "./styles/jupiter_theme_room.css";
 
@@ -16,6 +19,7 @@ import View5 from "./images/view5.jpg";
 import View6 from "./images/view6.jpg";
 
 export default function JupiterThemeRoom() {
+  const location = useLocation();
 
   const { getRoomById } = useRooms();
 
@@ -47,6 +51,10 @@ export default function JupiterThemeRoom() {
     loadPage()
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
+  
   return (
 
     <div className="page-container">

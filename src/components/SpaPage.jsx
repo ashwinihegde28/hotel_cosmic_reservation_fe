@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+
+import { Link, useLocation } from "react-router-dom";
 
 import "./styles/services-styles.css";
 
@@ -12,6 +15,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import { useServices } from "../hooks/servicesHook"; 
 
 export default function SpaPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
 
   const { getService } = useServices();
 

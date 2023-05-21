@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import Button from "../components/Button";
 import InvoicePopup from "./Invoice";
 
@@ -64,6 +64,12 @@ export default function Reservations(props) {
   const { rooms } = useRooms();
 
   // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
 
   // added an object here
   //  line 263 name, email, room, card: paymentMethod.id, paymentMethod

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { useRooms } from "../hooks/roomsHook";
 
@@ -47,6 +47,12 @@ export default function MoonThemeRoom() {
   useEffect(() => {
     loadPage()
   }, [])
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
+  
 
   return (
 

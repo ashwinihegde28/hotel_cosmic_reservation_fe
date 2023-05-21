@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./styles/moon_theme_room-styles.css";
 
@@ -16,6 +16,11 @@ import View2 from "./images/view2.png";
 import { useRooms } from "../hooks/roomsHook";
 
 export default function VenusThemeRoom() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
 
   const { getRoomById } = useRooms();
 

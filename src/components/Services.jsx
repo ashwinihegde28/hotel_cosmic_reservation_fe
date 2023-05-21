@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 import "./styles/navbar-styles.css"
 import "./styles/services-styles.css"
@@ -19,6 +20,11 @@ import Restaurant1 from "./images/restaurant.jpg";
 
 
 export default function Services() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
 
   return (
     
