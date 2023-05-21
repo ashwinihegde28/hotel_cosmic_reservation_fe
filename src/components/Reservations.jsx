@@ -134,6 +134,23 @@ export default function Reservations(props) {
     });
   };
 
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    if (value === "" || !value.includes("@") || !value.includes(".")) {
+      setError((prevError) => ({
+        ...prevError,
+        email:
+          email === ""
+            ? "Please enter email"
+            : "Please enter a valid email.  sample : example@abc.com",
+      }));
+    } else {
+      setError((prevError) => ({ ...prevError, email: "" }));
+    }
+  };
+
   async function validateBooking(event) {
     event.preventDefault();
 
@@ -257,7 +274,7 @@ export default function Reservations(props) {
                         size="lg"
                         type="email"
                         placeholder="Enter email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange} // Update the event handler
                         value={email}
                         isInvalid={!!error.email}
                       />
