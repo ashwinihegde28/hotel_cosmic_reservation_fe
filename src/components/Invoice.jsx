@@ -27,7 +27,7 @@ export default function InvoicePopup({ invoiceData, setShowInvoice }) {
   const descriptionValues = invoiceData.description.split(",");
 
   return (
-    <div className="invoice-popup" >
+    <div className="invoice-popup">
       <h1>Invoice</h1>
       <h4>Invoice Number: {invoiceData.id}</h4>
       <div className="invoice-details">

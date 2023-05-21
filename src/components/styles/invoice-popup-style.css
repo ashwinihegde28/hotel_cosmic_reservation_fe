@@ -16,6 +16,7 @@
 .invoice-details {
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 15px;
 }
 
 .detail-label {
@@ -26,6 +27,12 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 40px;
+  text-decoration: underline;
 }
 
 @media print {

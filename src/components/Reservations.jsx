@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import Button from "../components/Button";
 import InvoicePopup from "./Invoice";
 
@@ -67,7 +67,7 @@ export default function Reservations(props) {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, [location]);
 
   // added an object here
@@ -129,7 +129,6 @@ export default function Reservations(props) {
           // set entire invoice object to the newInvoice state to use it later.
           setNewInvoice(newInvoice1);
           setShowInvoice(true);
-          alert("Reserviation booked!");
         });
       });
     });
@@ -266,6 +265,14 @@ export default function Reservations(props) {
                         {error.email}
                       </Form.Control.Feedback>
                     </InputGroup>
+                    <div>
+                      {showInvoice && (
+                        <InvoicePopup
+                          invoiceData={newInvoice}
+                          setShowInvoice={setShowInvoice}
+                        />
+                      )}
+                    </div>
                     <Form.Text className="text-muted">
                       Your information is secured with us, it will never be
                       shared.
@@ -311,14 +318,6 @@ export default function Reservations(props) {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-              <div>
-                {showInvoice && (
-                  <InvoicePopup
-                    invoiceData={newInvoice}
-                    setShowInvoice={setShowInvoice}
-                  />
-                )}
-              </div>
               <Accordion>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Calender</Accordion.Header>
