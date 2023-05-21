@@ -31,10 +31,6 @@ export default function Reservations(props) {
   const [showInvoice, setShowInvoice] = useState(false);
   const [newInvoice, setNewInvoice] = useState(null);
 
-  const handleCalendarChange = (newDate) => {
-    setDate(newDate);
-  };
-
   const [error, setError] = useState({
     email: "",
     name: "",
@@ -69,6 +65,10 @@ export default function Reservations(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  const handleCalendarChange = (newDate) => {
+    setDate(newDate);
+  };
 
   // added an object here
   //  line 263 name, email, room, card: paymentMethod.id, paymentMethod
