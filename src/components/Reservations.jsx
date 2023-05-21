@@ -55,7 +55,8 @@ export default function Reservations(props) {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [date, setDate] = useState(new Date());
+  //check-in and check-out dates are stored in state - date variable
+  const [date, setDate] = useState([new Date(), new Date()]);
 
   const { addReservation } = useReservations();
   const { addCustomer, getCustomerByEmail } = useCustomers();
@@ -274,7 +275,7 @@ export default function Reservations(props) {
                         size="lg"
                         type="email"
                         placeholder="Enter email"
-                        onChange={handleEmailChange} // Update the event handler
+                        onChange={handleEmailChange}
                         value={email}
                         isInvalid={!!error.email}
                       />
@@ -337,32 +338,31 @@ export default function Reservations(props) {
               </Form.Group>
               <Accordion>
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Calender</Accordion.Header>
+                  <Accordion.Header>Calendar</Accordion.Header>
                   <Accordion.Body>
-                    <div className="calender">
+                    <div className="calendar">
                       <h1 className="text-center">
                         Choose your arrival and departure date
                       </h1>
                       <div className="calendar-container">
                         <Calendar
-                          onChange={setDate}
+                          onChange={(newDate) => setDate(newDate)}
                           value={date}
                           selectRange={true}
                           minDate={new Date(2023, 5, 16)}
                         />
                       </div>
-                      {date.length > 0 ? (
+                      {date[0] && date[1] ? (
                         <p className="text-center">
                           <span className="bold">Start:</span>{" "}
-                          {date[0].toDateString()}
-                          &nbsp;|&nbsp;
+                          {date[0].toDateString()} |{" "}
                           <span className="bold">End:</span>{" "}
                           {date[1].toDateString()}
                         </p>
                       ) : (
                         <p className="text-center">
                           <span className="bold">Default selected date:</span>{" "}
-                          {date.toDateString()}
+                          {date[0].toDateString()}
                         </p>
                       )}
                     </div>
