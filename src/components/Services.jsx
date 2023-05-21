@@ -27,7 +27,7 @@ export default function Services() {
   return (
     
     <p className="services-body">
-    <i class="fa-solid fa-bed" style={{color: 'black'}}></i>
+    <i className="fa-solid fa-bed" style={{color: 'black'}}></i>
     <Container>
       <Col>
         <Row className="mb-4">

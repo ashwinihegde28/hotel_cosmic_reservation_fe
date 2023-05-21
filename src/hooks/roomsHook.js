@@ -22,13 +22,15 @@ export function useRooms() {
 
   const getRoomById = (id) => {
     // Fetching a room by ID
-    axios
+      return axios
       .get(`/api/rooms/${id}`)
       .then(({ data }) => {
         dispatch({
           type: "SET_ROOM",
           payload: data,
         });
+        //console.log(`getRoomById data`, data)
+        return data
       })
       .catch((err) => console.log(err));
   };

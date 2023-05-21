@@ -18,7 +18,7 @@ export default function RoomDisplay2() {
   return (
     
     <div className="room-body">
-      <i class="fa-solid fa-bed" style={{color: 'black'}}></i>
+      <i className="fa-solid fa-bed" style={{color: 'black'}}></i>
       <Container>
         <Col>
           <Row className="mb-4">
