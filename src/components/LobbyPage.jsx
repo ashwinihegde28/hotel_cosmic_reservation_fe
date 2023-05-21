@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,6 +15,12 @@ import restaurantImage from "./images/restaurant.jpg";
 import spaImage from "./images/spa.jpg";
 
 export default function LobbyPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location]);
+
   return (
     <div className="lobby-body">
     <Container>
