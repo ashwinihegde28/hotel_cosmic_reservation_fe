@@ -1,8 +1,8 @@
+
 .cards {
   padding: 30px;
   display: flex;
   justify-content: space-evenly;
-
 }
 
 .theme-description {
@@ -47,16 +47,31 @@
   margin-right: 10px;
   margin-left: 10px;
 }
-
-.icons-container {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 40px;
-  padding-right: 40px;
-  padding-bottom: 20px;
-
+.cash-icon {
+  height: 80px;
+  width: 80px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
+.icons-container {
+  color: white;
+  background-color: #050336;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+}
+.icons-left {
+  display: flex;
+  flex-direction: row;
+}
+.icons-right {
+  display: flex;
+  flex-direction: row;
+}
 .h4-icon {
   font-size: 2rem;
 }
@@ -70,6 +85,15 @@
 }
 
 .bed:hover svg,
-.bath:hover svg {
+.bath:hover svg,
+.cash:hover svg {
   fill: blue;
+}
+
+.button-container2 {
+  background-color: #050336;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 30px;
 }

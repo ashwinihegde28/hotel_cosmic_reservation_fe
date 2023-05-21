@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from "../components/Button";
 
+import Search1 from './images/search.jpg';
+
 import "./styles/reservations-styles.css";
 
 import { useReservations } from "../hooks/reservationHook";
@@ -80,7 +82,7 @@ export default function Search() {
         <Card style={{ width: "50rem" }}>
           <Card.Img
             variant="top"
-            src="https://www.optics-trade.eu/blog/wp-content/uploads/2020/12/Telescope-VS-Binoculars.jpg"
+            src={Search1}
           />
           <Card.Body>
             <Card.Title>Looking for an existing reservation?</Card.Title>

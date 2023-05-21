@@ -5,6 +5,8 @@ import "./styles/services-styles.css";
 import Spa from "./images/spa.jpg";
 import Spa2 from "./images/spa2.jpg";
 import Lobby9 from "./images/lobby9.jpg";
+import View4 from "./images/view4.jpg";
+import View3 from "./images/view3.jpg";
 
 import Carousel from 'react-bootstrap/Carousel';
 import { useServices } from "../hooks/servicesHook"; 
@@ -73,8 +75,7 @@ export default function SpaPage() {
           <Carousel.Item interval={2500}>
             <img
               className="d-block w-100"
-              src="https://cdn.pixabay.com/photo/2017/02/08/12/46/moon-2048727_1280.jpg"
-              alt="Fourth slide"
+              src={View3}
             />
             <Carousel.Caption>
               <h3>View</h3>
@@ -83,7 +84,7 @@ export default function SpaPage() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://cdn.pixabay.com/photo/2014/02/05/19/58/blue-259458_1280.jpg"
+              src={View4}
               alt="Fifth slide"
             />
             <Carousel.Caption>

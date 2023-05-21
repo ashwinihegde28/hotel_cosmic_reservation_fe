@@ -6,6 +6,7 @@ import Bar1 from "./images/bar.png";
 import Bar2 from "./images/bar2.png";
 import Bar3 from "./images/bar3.png";
 import Bar4 from "./images/bar4.png";
+import View4 from "./images/view4.jpg";
 
 import Carousel from 'react-bootstrap/Carousel';
 import { useServices } from "../hooks/servicesHook"; 
@@ -84,7 +85,7 @@ export default function Bar() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://cdn.pixabay.com/photo/2014/02/05/19/58/blue-259458_1280.jpg"
+              src={View4}
               alt="Fifth slide"
             />
             <Carousel.Caption>

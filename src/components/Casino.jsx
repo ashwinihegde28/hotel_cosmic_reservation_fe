@@ -6,6 +6,7 @@ import Casino1 from "./images/casino.png";
 import Casino2 from "./images/casino2.png";
 import Casino3 from "./images/casino3.jpg";
 import Casino4 from "./images/casino4.jpg";
+import View4 from "./images/view4.jpg";
 
 import Carousel from 'react-bootstrap/Carousel';
 import { useServices } from "../hooks/servicesHook";
@@ -84,7 +85,7 @@ export default function Casino() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://cdn.pixabay.com/photo/2014/02/05/19/58/blue-259458_1280.jpg"
+              src={View4}
               alt="Fifth slide"
             />
             <Carousel.Caption>
