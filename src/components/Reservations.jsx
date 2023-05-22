@@ -67,7 +67,7 @@ export default function Reservations(props) {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, [location]);
 
   // added an object here
