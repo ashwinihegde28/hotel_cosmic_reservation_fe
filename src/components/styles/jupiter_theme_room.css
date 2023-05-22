@@ -65,3 +65,14 @@
 .bath:hover svg {
   fill: blue;
 }
+
+.digital-text {
+  display: flex;
+  align-items: end;
+  font-size: 35px;
+  padding-left: 20px;
+
+}
+.digital-text:hover {
+  color: blue;
+}
