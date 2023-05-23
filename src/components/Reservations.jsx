@@ -44,7 +44,7 @@ export default function Reservations(props) {
     checkOutDate: "",
     customerId: "",
     roomId: "",
-    totalPrice: 800,
+    totalPrice: 4000000.00,
   });
 
   const stripe = useStripe();
