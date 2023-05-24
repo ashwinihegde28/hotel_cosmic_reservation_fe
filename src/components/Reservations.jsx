@@ -30,6 +30,7 @@ export default function Reservations(props) {
   const [room, setRoom] = useState("");
   const [showInvoice, setShowInvoice] = useState(false);
   const [newInvoice, setNewInvoice] = useState(null);
+  const [roomPrice, setRoomPrice] = useState(null);
 
   const [error, setError] = useState({
     email: "",
@@ -44,7 +45,7 @@ export default function Reservations(props) {
     checkOutDate: "",
     customerId: "",
     roomId: "",
-    totalPrice: 4000000.00,
+    totalPrice: 4000000.0,
   });
 
   const stripe = useStripe();
@@ -62,12 +63,22 @@ export default function Reservations(props) {
 
   const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
+  //   useEffect(() => {
+  //     window.scrollTo(0, 0);
+  //   }, [location]);
 
   const handleCalendarChange = (newDate) => {
     setDate(newDate);
+  };
+
+  //Extract the day and time components from date[0] and date[1](Moved later to helper file.)
+  const extractDayAndTime = (dateObj) => {
+    const day = dateObj.toLocaleDateString("en-US", { weekday: "short" });
+    const time = dateObj.toLocaleTimeString("en-US", {
+      timeStyle: "short",
+    });
+    const date = dateObj.toLocaleDateString("en-US");
+    return `${day} ${time} (${date})`;
   };
 
   // added an object here
@@ -77,6 +88,16 @@ export default function Reservations(props) {
     const amount = 5000;
     const currency = "CAD";
     const paymentMethod = object.paymentMethod;
+
+    var price = 0;
+    var roomType = "Moon";
+    for (let roomObj of rooms) {
+      if (roomObj.id === Number(room)) {
+        setRoomPrice(roomObj.price);
+        price = roomObj.price;
+        roomType = roomObj.type;
+      }
+    }
 
     await customerPayment({ amount, currency, paymentMethod })
       .then((clientSecret) => {
@@ -121,7 +142,9 @@ export default function Reservations(props) {
       }).then((reservations) => {
         // must return reservations id
 
-        const description = `${name},${email},${room},${totalPrice}`;
+        const description = `${name},${email},${room},${roomType},${price},${extractDayAndTime(
+          new Date(date[0])
+        )},${extractDayAndTime(new Date(date[1]))}`;
         const reservations_id = reservations.id;
 
         addInvoice({ reservations_id, description }).then((newInvoice1) => {
@@ -326,7 +349,7 @@ export default function Reservations(props) {
                     <option value="0">Select a room</option>
                     {rooms.map((room) => (
                       <option key={room.id} value={room.id}>
-                        {room.type}
+                        {room.type} - {room.price} Digital currencies
                       </option>
                     ))}
                   </Form.Select>
