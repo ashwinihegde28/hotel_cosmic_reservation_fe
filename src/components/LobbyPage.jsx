@@ -58,7 +58,7 @@ export default function LobbyPage() {
         <LobbyCards
           title="Galactic Spa"
           text="Relax and unwind"        
-        img={spaImage}
+          img={spaImage}
           buttonText="View Spa"
           link="/spa"
         />

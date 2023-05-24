@@ -6,6 +6,10 @@ import Col from 'react-bootstrap/Col';
 
 import AboutusCards from "./AboutusCards";
 
+import roomsImage from "./images/rooms-lobby.png";
+import restaurantImage from "./images/restaurant.jpg";
+import spaImage from "./images/spa.jpg";
+
 import "./styles/footer-styles.css"
 import "./styles/aboutus-styles.css"
 
@@ -25,7 +29,7 @@ export default function Aboutus() {
                 <AboutusCards
                   title="Catherine"
                   text="Full Stack Web Developer"
-                  img="https://drive.google.com/uc?export=view&id=1cJXy4MbmODDsKFskm2qCINEpBBZNU19b"
+                  img={roomsImage}
                   buttonText="View Github"
                   link="https://github.com/catherinemitchell"
                   buttonText2="View Linked In"
@@ -36,7 +40,7 @@ export default function Aboutus() {
                 <AboutusCards
                   title="Ashwini"
                   text="Full Stack Web Developer"
-                  img="https://drive.google.com/uc?export=view&id=1k612ZBdfKE_NjCbdeAVq5DclVBTtKmzt"
+                  img={restaurantImage}
                   buttonText="View Github"
                   link="https://github.com/ashwinihegde28"
                   buttonText2="View Linked In"
@@ -47,7 +51,7 @@ export default function Aboutus() {
                 <AboutusCards
                   title="Jeremy"
                   text="Full Stack Web Developer"
-                  img="https://drive.google.com/uc?export=view&id=1pdO9RJ55eMMIaLudo7kiGDwOZN_MqIGE"
+                  img={spaImage}
                   buttonText="View Github"
                   link="https://github.com/010JGL"
                   buttonText2="View Linked In"
