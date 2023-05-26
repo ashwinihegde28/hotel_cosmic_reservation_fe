@@ -33,7 +33,7 @@ export default function Aboutus() {
                   buttonText="View Github"
                   link="https://github.com/catherinemitchell"
                   buttonText2="View Linked In"
-                  link2=""
+                  link2="https://www.linkedin.com/in/catherine-mitchell-01a133278/"
                 />
               </Col>
               <Col className="mb-4">
